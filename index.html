@@ -150,9 +150,9 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);ove
 .field-group label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:3px;}
 .field-group input,.field-group select{width:100%;padding:6px 8px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:12px;background:white;color:var(--dark);outline:none;}
 .field-group input:focus,.field-group select:focus{border-color:var(--gold);}
-.items-hdr{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 1fr 46px 46px;gap:5px;margin-bottom:5px;padding:0 2px;}
+.items-hdr{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 46px 46px;gap:5px;margin-bottom:5px;padding:0 2px;}
 .items-hdr span{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);}
-.item-edit-row{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 1fr 46px 46px;gap:5px;align-items:start;margin-bottom:4px;padding:7px 6px;border-radius:8px;background:var(--cream);}
+.item-edit-row{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 46px 46px;gap:5px;align-items:start;margin-bottom:4px;padding:7px 6px;border-radius:8px;background:var(--cream);}
 .item-edit-row input,.item-edit-row select{padding:5px 7px;border:1px solid var(--accent);border-radius:5px;font-family:'Jost',sans-serif;font-size:11px;background:white;color:var(--dark);outline:none;width:100%;}
 .item-edit-row input:focus,.item-edit-row select:focus{border-color:var(--gold);}
 .drag-handle{color:var(--muted);font-size:13px;cursor:grab;text-align:center;padding-top:4px;}
@@ -161,10 +161,10 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);ove
 .toggle-vis{border:1px solid var(--accent);border-radius:5px;font-size:10px;cursor:pointer;padding:3px 4px;font-family:'Jost',sans-serif;color:var(--muted);width:100%;text-align:center;background:white;}
 .toggle-vis.h{background:#fef0f0;color:#C44;border-color:#f5c0c0;}
 .toggle-vis.v{background:#f0fef4;color:#2d7a3a;border-color:#b0dcb8;}
-.allergen-row{grid-column:2/-1;background:#f5f0ea;border-radius:6px;padding:6px 8px;margin-bottom:4px;}
-.allergen-row label-head{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:4px;}
-.allergen-checks{display:flex;flex-wrap:wrap;gap:5px;}
-.a-check{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--dark);cursor:pointer;}
+.allergen-row{background:#f5f0ea;border-radius:6px;padding:6px 8px;margin-bottom:4px;}
+.allergen-row .al-label{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:3px;}
+.allergen-row textarea{width:100%;padding:5px 7px;border:1px solid var(--accent);border-radius:5px;font-family:'Jost',sans-serif;font-size:11px;background:white;color:var(--dark);outline:none;resize:none;height:36px;line-height:1.4;}
+.allergen-row textarea:focus{border-color:var(--gold);}
 .photo-wrap{display:flex;flex-direction:column;gap:3px;}
 .photo-preview-thumb{width:100%;height:28px;object-fit:cover;border-radius:4px;border:1px solid var(--accent);display:none;}
 .btn-add{margin-top:8px;padding:6px 12px;background:var(--cream);border:1px dashed var(--brown);border-radius:6px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;color:var(--brown);cursor:pointer;}
@@ -222,7 +222,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);ove
   </div>
   <div class="menu-body" id="menu-body"></div>
   <div class="pub-footer">
-    <div class="pub-footer-info"><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div>Telegram: <strong>@PerkUPBot</strong></div></div>
+    <div class="pub-footer-info"><div>Wi-Fi: <strong>PerkUP_guest</strong></div><div>Telegram: <strong>t.me/perkup_news</strong></div></div>
     <button class="admin-trigger" onclick="openAdmin()">· · ·</button>
   </div>
 </div>
@@ -293,10 +293,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);ove
   </div>
 </div>
 <script>
-var ALLERGENS_UA=['Глютен','Молоко','Яйця','Горіхи','Соя','Кунжут','Сульфіти'];
-var ALLERGENS_EN=['Gluten','Milk','Eggs','Nuts','Soy','Sesame','Sulphites'];
 var lang='uk';
-function aLabel(i){return lang==='uk'?ALLERGENS_UA[i]:ALLERGENS_EN[i];}
 function hashStr(s){var h=0x12345678;for(var i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;h^=(h>>>16);}return(h>>>0).toString(36);}
 var ADMIN_HASH=hashStr('57ba1z72');
 var isAdmin=false,failCount=0,lockUntil=0;
@@ -420,7 +417,7 @@ function renderMenu(){
       var card=document.createElement('div');card.className='menu-card';
       card.onclick=function(){openModal(si,realIdx);};
       var b='';if(item.badge==='new')b='<span class="badge badge-new">NEW</span>';if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span>';if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span>';
-      var al=(item.allergens&&item.allergens.length)?item.allergens.slice(0,3).map(function(a){return '<span class="allergen-tag">'+aLabel(a)+'</span>';}).join(''):'';
+      var al=item.composition?'<span class="allergen-tag">'+(lang==='uk'?'Склад':'Ingredients')+'</span>':'';
       var img=item.photo?'<div class="menu-card-img"><img src="'+item.photo+'" alt="" loading="lazy" onerror="this.parentElement.className=\'menu-card-img no-photo\';this.parentElement.innerHTML=\''+sec.icon+'\'"/></div>':'<div class="menu-card-img no-photo">'+sec.icon+'</div>';
       card.innerHTML='<div class="menu-card-inner">'+img+'<div class="menu-card-body"><div class="menu-card-top"><div class="menu-card-name">'+(item.name[lang]||item.name.uk)+'</div><div class="menu-card-price">'+item.price+'</div></div>'+(item.note&&(item.note[lang]||item.note.uk)?'<div class="menu-card-note">'+(item.note[lang]||item.note.uk)+'</div>':'')+'<div class="menu-card-bottom">'+b+al+'</div></div></div>';
       iWrap.appendChild(card);
@@ -435,7 +432,7 @@ function renderMenu(){
 function openModal(si,ii){
   var sec=menuData.sections[si];var item=sec.items[ii];
   var b='';if(item.badge==='new')b='<span class="badge badge-new">NEW</span> ';if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span> ';if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span> ';
-  var al=(item.allergens&&item.allergens.length)?'<div class="modal-allergens"><h4>'+(lang==='uk'?'Алергени':'Allergens')+'</h4><div class="modal-allergens-list">'+item.allergens.map(function(a){return '<span class="allergen-tag">'+aLabel(a)+'</span>';}).join('')+'</div></div>':'';
+  var al=item.composition?'<div class="modal-allergens"><h4>'+(lang==='uk'?'Склад / алергени':'Ingredients / allergens')+'</h4><p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:4px;">'+item.composition+'</p></div>':'';
   var img=item.photo?'<img class="modal-img" src="'+item.photo+'" alt="" onerror="this.style.display=\'none\'">':'<div class="modal-img-placeholder">'+sec.icon+'</div>';
   document.getElementById('modal-content').innerHTML='<button class="modal-close" onclick="closeModal()">✕</button>'+img+'<div class="modal-name">'+(item.name[lang]||item.name.uk)+'</div><div class="modal-price">'+item.price+'</div>'+b+(item.note&&(item.note[lang]||item.note.uk)?'<div class="modal-note">'+(item.note[lang]||item.note.uk)+'</div>':'')+al;
   document.getElementById('item-modal').classList.add('open');
@@ -479,50 +476,170 @@ function downloadPrintHTML(){
 function renderEditor(){
   var root=document.getElementById('editor-root');root.innerHTML='';
   menuData.sections.forEach(function(sec,si){
-    var div=document.createElement('div');div.className='section-editor';div.dataset.si=si;div.setAttribute('draggable','true');
-    var allergenLabels=ALLERGENS_UA.join(', ');
-    div.innerHTML='<div class="sec-hdr" onclick="togSec('+si+')"><div class="sec-hdr-left"><span class="sec-drag-handle" onmousedown="event.stopPropagation()" title="Перетягнути">⠿</span><span>'+sec.icon+' '+(sec.title.uk||'')+ ' ('+sec.items.length+')</span></div><span class="tog" id="tog-'+si+'">▾</span></div><div class="sec-body" id="secb-'+si+'"><div class="sec-meta-row"><div class="field-group"><label>Назва UA</label><input type="text" value="'+(sec.title.uk||'')+'" oninput="updSec('+si+',\'title_uk\',this.value)"/></div><div class="field-group"><label>Назва EN</label><input type="text" value="'+(sec.title.en||'')+'" oninput="updSec('+si+',\'title_en\',this.value)"/></div><div class="field-group"><label>Іконка</label><input type="text" value="'+sec.icon+'" oninput="updSec('+si+',\'icon\',this.value)"/></div></div><div class="sec-meta-row two"><div class="field-group"><label>Опис UA</label><input type="text" value="'+(sec.desc&&sec.desc.uk||'')+'" oninput="updSec('+si+',\'desc_uk\',this.value)"/></div><div class="field-group"><label>Опис EN</label><input type="text" value="'+(sec.desc&&sec.desc.en||'')+'" oninput="updSec('+si+',\'desc_en\',this.value)"/></div></div><div class="items-hdr"><span></span><span>Назва UA/EN</span><span>Опис</span><span>Ціна</span><span>Бейдж</span><span>Фото URL</span><span>Вид</span><span>Del</span></div><div id="items-'+si+'"></div><button class="btn-add" onclick="addItem('+si+')">+ Позиція</button><div style="margin-top:8px;text-align:right;"><button onclick="delSec('+si+')" style="font-size:11px;color:#c44;background:none;border:none;cursor:pointer;padding:3px 7px;">✕ Видалити секцію</button></div></div>';
+    var div=document.createElement('div');div.className='section-editor';div.dataset.si=si;
+    div.innerHTML=
+      '<div class="sec-hdr"><div class="sec-hdr-left">'
+      +'<span class="sec-drag-handle" draggable="true" data-sec-drag="'+si+'" title="Перетягнути секцію">⠿</span>'
+      +'<span onclick="togSec('+si+')">'+sec.icon+' '+(sec.title.uk||'')+' ('+sec.items.length+')</span>'
+      +'</div><span class="tog" id="tog-'+si+'" onclick="togSec('+si+')">▾</span></div>'
+      +'<div class="sec-body" id="secb-'+si+'">'
+      +'<div class="sec-meta-row">'
+      +'<div class="field-group"><label>Назва UA</label><input type="text" value="'+(sec.title.uk||'')+'" oninput="updSec('+si+',\'title_uk\',this.value)"/></div>'
+      +'<div class="field-group"><label>Назва EN</label><input type="text" value="'+(sec.title.en||'')+'" oninput="updSec('+si+',\'title_en\',this.value)"/></div>'
+      +'<div class="field-group"><label>Іконка</label><input type="text" value="'+sec.icon+'" oninput="updSec('+si+',\'icon\',this.value)"/></div>'
+      +'</div>'
+      +'<div class="sec-meta-row two">'
+      +'<div class="field-group"><label>Опис UA</label><input type="text" value="'+(sec.desc&&sec.desc.uk||'')+'" oninput="updSec('+si+',\'desc_uk\',this.value)"/></div>'
+      +'<div class="field-group"><label>Опис EN</label><input type="text" value="'+(sec.desc&&sec.desc.en||'')+'" oninput="updSec('+si+',\'desc_en\',this.value)"/></div>'
+      +'</div>'
+      +'<div class="items-hdr"><span></span><span>Назва UA / EN</span><span>Опис UA / EN</span><span>Ціна</span><span>Бейдж</span><span>Вид</span><span>Del</span></div>'
+      +'<div id="items-'+si+'"></div>'
+      +'<button class="btn-add" onclick="addItem('+si+')">+ Позиція</button>'
+      +'<div style="margin-top:8px;text-align:right;"><button onclick="delSec('+si+')" style="font-size:11px;color:#c44;background:none;border:none;cursor:pointer;padding:3px 7px;">✕ Видалити секцію</button></div>'
+      +'</div>';
     root.appendChild(div);
     renderItems(si);
   });
   initSecDrag();
 }
+
 function renderItems(si){
   var wrap=document.getElementById('items-'+si);if(!wrap)return;wrap.innerHTML='';
   menuData.sections[si].items.forEach(function(item,ii){
-    var row=document.createElement('div');row.className='item-edit-row';row.dataset.ii=ii;row.setAttribute('draggable','true');
-    var al=ALLERGENS_UA.map(function(a,ai){return '<label class="a-check"><input type="checkbox"'+(item.allergens&&item.allergens.includes(ai)?' checked':'')+' onchange="toggleAl('+si+','+ii+','+ai+',this.checked)"/> '+a+'</label>';}).join('');
-    row.innerHTML='<span class="drag-handle">⠿</span><div><input type="text" value="'+(item.name.uk||'')+'" placeholder="UA" oninput="updItem('+si+','+ii+',\'name_uk\',this.value)" style="margin-bottom:3px;"/><input type="text" value="'+(item.name.en||'')+'" placeholder="EN" oninput="updItem('+si+','+ii+',\'name_en\',this.value)"/></div><div><input type="text" value="'+(item.note&&item.note.uk||'')+'" placeholder="Опис UA" oninput="updItem('+si+','+ii+',\'note_uk\',this.value)" style="margin-bottom:3px;"/><input type="text" value="'+(item.note&&item.note.en||'')+'" placeholder="Note EN" oninput="updItem('+si+','+ii+',\'note_en\',this.value)"/></div><input type="text" value="'+item.price+'" placeholder="₴" oninput="updItem('+si+','+ii+',\'price\',this.value)"/><select onchange="updItem('+si+','+ii+',\'badge\',this.value)"><option value=""'+(!item.badge?' selected':'')+'>—</option><option value="new"'+(item.badge==='new'?' selected':'')+'>NEW</option><option value="hot"'+(item.badge==='hot'?' selected':'')+'>ХІТ</option><option value="seasonal"'+(item.badge==='seasonal'?' selected':'')+'>Сезон</option></select><div class="photo-wrap"><input type="text" value="'+(item.photo||'')+'" placeholder="https://..." oninput="updItem('+si+','+ii+',\'photo\',this.value);updPhotoThumb('+si+','+ii+',this.value)"/><img id="pth-'+si+'-'+ii+'" class="photo-preview-thumb" src="'+(item.photo||'')+'" style="'+(item.photo?'display:block':'display:none')+'" onerror="this.style.display=\'none\'"/></div><button class="toggle-vis '+(item.visible===false?'h':'v')+'" onclick="toggleVis('+si+','+ii+')">'+(item.visible===false?'Скрит':'Видно')+'</button><button class="btn-del" onclick="delItem('+si+','+ii+')">✕</button>';
-    var alRow=document.createElement('div');alRow.className='allergen-row';alRow.innerHTML='<span style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:4px;">Алергени:</span><div class="allergen-checks">'+al+'</div>';
-    wrap.appendChild(row);wrap.appendChild(alRow);
+    // ─ рядок позиції ─
+    var row=document.createElement('div');
+    row.className='item-edit-row';row.dataset.ii=ii;
+    var nameUk=esc(item.name.uk||'');
+    var nameEn=esc(item.name.en||'');
+    var noteUk=esc(item.note&&item.note.uk||'');
+    var noteEn=esc(item.note&&item.note.en||'');
+    var price=esc(item.price||'');
+    var visCls=item.visible===false?'h':'v';
+    var visLbl=item.visible===false?'Скрито':'Видно';
+    row.innerHTML=
+      '<span class="drag-handle" draggable="true" data-item-drag="'+si+'-'+ii+'" title="Перетягнути позицію">⠿</span>'
+      +'<div>'
+      +'<input type="text" value="'+nameUk+'" placeholder="Назва UA" oninput="updItem('+si+','+ii+',\'name_uk\',this.value)" style="margin-bottom:3px;"/>'
+      +'<input type="text" value="'+nameEn+'" placeholder="Name EN" oninput="updItem('+si+','+ii+',\'name_en\',this.value)"/>'
+      +'</div>'
+      +'<div>'
+      +'<input type="text" value="'+noteUk+'" placeholder="Опис UA" oninput="updItem('+si+','+ii+',\'note_uk\',this.value)" style="margin-bottom:3px;"/>'
+      +'<input type="text" value="'+noteEn+'" placeholder="Note EN" oninput="updItem('+si+','+ii+',\'note_en\',this.value)"/>'
+      +'</div>'
+      +'<input type="text" value="'+price+'" placeholder="₴" oninput="updItem('+si+','+ii+',\'price\',this.value)"/>'
+      +'<select onchange="updItem('+si+','+ii+',\'badge\',this.value)">'
+      +'<option value=""'+(!item.badge?' selected':'')+'>—</option>'
+      +'<option value="new"'+(item.badge==='new'?' selected':'')+'>NEW</option>'
+      +'<option value="hot"'+(item.badge==='hot'?' selected':'')+'>ХІТ</option>'
+      +'<option value="seasonal"'+(item.badge==='seasonal'?' selected':'')+'>Сезон</option>'
+      +'</select>'
+      +'<button class="toggle-vis '+visCls+'" onclick="toggleVis('+si+','+ii+')">'+visLbl+'</button>'
+      +'<button class="btn-del" onclick="delItem('+si+','+ii+')">✕</button>';
+
+    // ─ рядок складу ─
+    var compRow=document.createElement('div');
+    compRow.className='allergen-row';
+    var compVal=esc(item.composition||'');
+    compRow.innerHTML=
+      '<span class="al-label">Склад / алергени:</span>'
+      +'<textarea placeholder="Наприклад: молоко, глютен, горіхи..." oninput="updItem('+si+','+ii+',\'composition\',this.value)">'+compVal+'</textarea>';
+
+    wrap.appendChild(row);
+    wrap.appendChild(compRow);
   });
   initItemDrag(si);
 }
-function updPhotoThumb(si,ii,v){var img=document.getElementById('pth-'+si+'-'+ii);if(!img)return;if(v){img.src=v;img.style.display='block';}else img.style.display='none';}
-function toggleAl(si,ii,ai,checked){if(!menuData.sections[si].items[ii].allergens)menuData.sections[si].items[ii].allergens=[];if(checked){if(!menuData.sections[si].items[ii].allergens.includes(ai))menuData.sections[si].items[ii].allergens.push(ai);}else menuData.sections[si].items[ii].allergens=menuData.sections[si].items[ii].allergens.filter(function(x){return x!==ai;});markUnsaved();renderMenu();}
+
+// Екранує значення для вставки в HTML-атрибут value=""
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
 function toggleVis(si,ii){menuData.sections[si].items[ii].visible=menuData.sections[si].items[ii].visible===false?true:false;renderItems(si);markUnsaved();renderMenu();renderPrint();buildFilters();}
 function togSec(si){var b=document.getElementById('secb-'+si),t=document.getElementById('tog-'+si);if(b.style.display==='none'){b.style.display='';t.textContent='▾';}else{b.style.display='none';t.textContent='▸';}}
 function updSec(si,f,v){var sec=menuData.sections[si];if(f==='title_uk')sec.title.uk=v;else if(f==='title_en')sec.title.en=v;else if(f==='desc_uk'){if(!sec.desc)sec.desc={uk:'',en:''};sec.desc.uk=v;}else if(f==='desc_en'){if(!sec.desc)sec.desc={uk:'',en:''};sec.desc.en=v;}else sec[f]=v;markUnsaved();renderMenu();renderPrint();}
-function updItem(si,ii,f,v){var item=menuData.sections[si].items[ii];if(f==='name_uk')item.name.uk=v;else if(f==='name_en')item.name.en=v;else if(f==='note_uk'){if(!item.note||typeof item.note==='string')item.note={uk:v,en:''};else item.note.uk=v;}else if(f==='note_en'){if(!item.note||typeof item.note==='string')item.note={uk:'',en:v};else item.note.en=v;}else item[f]=v;markUnsaved();renderMenu();renderPrint();}
+function updItem(si,ii,f,v){
+  var item=menuData.sections[si].items[ii];
+  if(f==='name_uk')item.name.uk=v;
+  else if(f==='name_en')item.name.en=v;
+  else if(f==='note_uk'){if(!item.note||typeof item.note==='string')item.note={uk:v,en:''};else item.note.uk=v;}
+  else if(f==='note_en'){if(!item.note||typeof item.note==='string')item.note={uk:'',en:v};else item.note.en=v;}
+  else if(f==='composition')item.composition=v;
+  else item[f]=v;
+  markUnsaved();renderMenu();renderPrint();
+}
 function delItem(si,ii){menuData.sections[si].items.splice(ii,1);renderItems(si);markUnsaved();renderMenu();renderPrint();}
-function addItem(si){menuData.sections[si].items.push({name:{uk:'Нова позиція',en:'New item'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',allergens:[],visible:true});renderItems(si);markUnsaved();renderMenu();}
+function addItem(si){menuData.sections[si].items.push({name:{uk:'Нова позиція',en:'New item'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',composition:'',visible:true});renderItems(si);markUnsaved();renderMenu();}
 function delSec(si){if(!confirm('Видалити секцію?'))return;menuData.sections.splice(si,1);renderEditor();markUnsaved();renderMenu();renderPrint();}
-function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:{uk:'Нова секція',en:'New section'},desc:{uk:'',en:''},items:[{name:{uk:'Позиція 1',en:'Item 1'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',allergens:[],visible:true}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
+function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:{uk:'Нова секція',en:'New section'},desc:{uk:'',en:''},items:[{name:{uk:'Позиція 1',en:'Item 1'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',composition:'',visible:true}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
 function markUnsaved(){var s=document.getElementById('save-status');if(s)s.textContent='⚠ Є незбережені зміни';}
 function saveData(){localStorage.setItem('perkup_menu_v2',JSON.stringify(menuData));var s=document.getElementById('save-status');if(s)s.textContent='✓ Збережено';setTimeout(function(){if(s)s.textContent='Всі зміни збережено';},2000);}
+
+// ── DRAG & DROP — використовує drop, не перерендерює на dragover ──
+var _dragSec=null,_dragSecIdx=null;
+var _dragItem=null,_dragItemSi=null,_dragItemIdx=null;
+
 function initItemDrag(si){
   var wrap=document.getElementById('items-'+si);if(!wrap)return;
-  var dragged=null,dragIdx=null;
-  wrap.addEventListener('dragstart',function(e){var t=e.target.closest('.item-edit-row');if(!t)return;dragged=t;dragIdx=parseInt(t.dataset.ii);setTimeout(function(){if(dragged)dragged.style.opacity='0.35';},0);});
-  wrap.addEventListener('dragend',function(){if(dragged)dragged.style.opacity='1';dragged=null;});
-  wrap.addEventListener('dragover',function(e){e.preventDefault();var t=e.target.closest('.item-edit-row');if(!t||t===dragged)return;var ti=parseInt(t.dataset.ii);if(ti===dragIdx)return;var items=menuData.sections[si].items;var moved=items.splice(dragIdx,1)[0];items.splice(ti,0,moved);dragIdx=ti;renderItems(si);markUnsaved();renderMenu();});
+  wrap.addEventListener('dragstart',function(e){
+    var handle=e.target.closest('[data-item-drag]');if(!handle)return;
+    var parts=handle.dataset.itemDrag.split('-');
+    _dragItemSi=parseInt(parts[0]);_dragItemIdx=parseInt(parts[1]);
+    _dragItem=e.target.closest('.item-edit-row');
+    if(_dragItem)setTimeout(function(){_dragItem.style.opacity='0.4';},0);
+    e.dataTransfer.effectAllowed='move';
+  });
+  wrap.addEventListener('dragend',function(){if(_dragItem){_dragItem.style.opacity='1';}_dragItem=null;_dragItemSi=null;_dragItemIdx=null;});
+  wrap.addEventListener('dragover',function(e){
+    e.preventDefault();e.dataTransfer.dropEffect='move';
+    var t=e.target.closest('.item-edit-row');
+    if(!t||_dragItemSi===null)return;
+    wrap.querySelectorAll('.item-edit-row').forEach(function(r){r.style.outline='';});
+    t.style.outline='2px solid var(--gold)';
+  });
+  wrap.addEventListener('dragleave',function(){wrap.querySelectorAll('.item-edit-row').forEach(function(r){r.style.outline='';});});
+  wrap.addEventListener('drop',function(e){
+    e.preventDefault();
+    wrap.querySelectorAll('.item-edit-row').forEach(function(r){r.style.outline='';});
+    if(_dragItemSi===null||_dragItemIdx===null)return;
+    var t=e.target.closest('.item-edit-row');if(!t)return;
+    var toIdx=parseInt(t.dataset.ii);
+    if(toIdx===_dragItemIdx)return;
+    var moved=menuData.sections[_dragItemSi].items.splice(_dragItemIdx,1)[0];
+    menuData.sections[_dragItemSi].items.splice(toIdx,0,moved);
+    renderItems(_dragItemSi);markUnsaved();renderMenu();
+    _dragItem=null;_dragItemSi=null;_dragItemIdx=null;
+  });
 }
+
 function initSecDrag(){
   var root=document.getElementById('editor-root');if(!root)return;
-  var dragged=null,dragIdx=null;
-  root.addEventListener('dragstart',function(e){var t=e.target.closest('.section-editor');if(!t)return;var h=e.target.closest('.sec-drag-handle');if(!h)return;dragged=t;dragIdx=parseInt(t.dataset.si);setTimeout(function(){if(dragged)dragged.style.opacity='0.35';},0);});
-  root.addEventListener('dragend',function(){if(dragged)dragged.style.opacity='1';dragged=null;});
-  root.addEventListener('dragover',function(e){e.preventDefault();var t=e.target.closest('.section-editor');if(!t||t===dragged)return;var ti=parseInt(t.dataset.si);if(ti===dragIdx)return;var moved=menuData.sections.splice(dragIdx,1)[0];menuData.sections.splice(ti,0,moved);dragIdx=ti;renderEditor();markUnsaved();renderMenu();});
+  root.addEventListener('dragstart',function(e){
+    var handle=e.target.closest('[data-sec-drag]');if(!handle)return;
+    _dragSecIdx=parseInt(handle.dataset.secDrag);
+    _dragSec=e.target.closest('.section-editor');
+    if(_dragSec)setTimeout(function(){_dragSec.style.opacity='0.4';},0);
+    e.dataTransfer.effectAllowed='move';
+  });
+  root.addEventListener('dragend',function(){if(_dragSec)_dragSec.style.opacity='1';_dragSec=null;_dragSecIdx=null;root.querySelectorAll('.section-editor').forEach(function(el){el.style.outline='';});});
+  root.addEventListener('dragover',function(e){
+    e.preventDefault();e.dataTransfer.dropEffect='move';
+    var t=e.target.closest('.section-editor');
+    if(!t||_dragSecIdx===null)return;
+    root.querySelectorAll('.section-editor').forEach(function(el){el.style.outline='';});
+    t.style.outline='2px solid var(--gold)';
+  });
+  root.addEventListener('dragleave',function(e){if(!root.contains(e.relatedTarget))root.querySelectorAll('.section-editor').forEach(function(el){el.style.outline='';});});
+  root.addEventListener('drop',function(e){
+    e.preventDefault();
+    root.querySelectorAll('.section-editor').forEach(function(el){el.style.outline='';});
+    if(_dragSecIdx===null)return;
+    var t=e.target.closest('.section-editor');if(!t)return;
+    var toIdx=parseInt(t.dataset.si);
+    if(toIdx===_dragSecIdx)return;
+    var moved=menuData.sections.splice(_dragSecIdx,1)[0];
+    menuData.sections.splice(toIdx,0,moved);
+    renderEditor();markUnsaved();renderMenu();
+    _dragSec=null;_dragSecIdx=null;
+  });
 }
 function showATab(name,btn){
   document.querySelectorAll('.atab-content').forEach(function(t){t.classList.remove('active');});
