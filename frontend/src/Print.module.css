@@ -60,7 +60,8 @@
 .pItem:last-child { border-bottom: none; }
 .pThumb { width: 34px; height: 34px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
 .pItemBody { flex: 1; }
-.pName { font-weight: 500; color: var(--dark); }
+.pName { font-weight: 500; color: var(--dark); display:flex; align-items:center; flex-wrap:wrap; gap:4px; }
+.pBadge { font-size:9px; font-weight:700; padding:1px 5px; border-radius:10px; white-space:nowrap; }
 .pDesc { font-size: 10px; color: var(--muted); font-style: italic; margin-top: 1px; }
 .pPrice { font-weight: 700; color: var(--brown); white-space: nowrap; flex-shrink: 0; font-size: 12px; }
 

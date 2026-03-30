@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import s from './Print.module.css';
+import { getBadge } from './badges';
 
 export default function Print({ menuData, onClose }) {
   const [cols, setCols] = useState(2);
@@ -124,7 +125,13 @@ body{font-family:'Jost',sans-serif;color:#1C1A17;background:white;padding:12mm}
                 <div key={item.id} className={s.pItem}>
                   {showPhotos && item.photo && <img className={s.pThumb} src={item.photo} alt={item.name} />}
                   <div className={s.pItemBody}>
-                    <div className={s.pName}>{item.name}</div>
+                    <div className={s.pName}>
+                      {item.name}
+                      {(item.badges || []).map(id => {
+                        const b = getBadge(id);
+                        return b ? <span key={id} className={s.pBadge} style={{ background: b.bg, color: b.color }}>{b.emoji} {b.labelUk}</span> : null;
+                      })}
+                    </div>
                     {showDesc && item.description && <div className={s.pDesc}>{item.description}</div>}
                   </div>
                   {showPrices && <div className={s.pPrice}>{item.price}</div>}

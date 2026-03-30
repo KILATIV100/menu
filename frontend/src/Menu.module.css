@@ -5,13 +5,13 @@
 .logo span { color: var(--gold); }
 .logo small { display: block; font-family: 'Jost', sans-serif; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.38); font-weight: 400; margin-top: 3px; }
 .lang { display: flex; background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; }
-.lb { padding: 5px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; border: none; background: none; color: rgba(255,255,255,0.4); cursor: pointer; }
+.lb { padding: 5px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; border: none; background: none; color: rgba(255,255,255,0.4); cursor: pointer; font-family: 'Jost', sans-serif; }
 .la { background: var(--gold); color: white; border-radius: 20px; }
 
 .searchBox { position: relative; max-width: 720px; margin: 14px auto 0; padding: 0 16px; }
 .si { position: absolute; left: 30px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
-.si2 { width: 100%; padding: 10px 38px 10px 40px; border: 1.5px solid var(--accent); border-radius: 28px; font-size: 14px; background: white; color: var(--dark); outline: none; font-family: 'Jost', sans-serif; transition: border-color 0.2s; }
-.si2:focus { border-color: var(--gold); }
+.input { width: 100%; padding: 10px 36px 10px 40px; border: 1.5px solid var(--accent); border-radius: 28px; font-size: 14px; background: white; color: var(--dark); outline: none; font-family: 'Jost', sans-serif; transition: border-color 0.2s; }
+.input:focus { border-color: var(--gold); }
 .sc { position: absolute; right: 26px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 15px; color: var(--muted); cursor: pointer; }
 
 .filters { display: flex; gap: 7px; overflow-x: auto; padding: 11px 16px 0; scrollbar-width: none; max-width: 720px; margin: 0 auto; }
@@ -37,19 +37,24 @@
 .card:active { transform: scale(0.985); }
 .card:hover { border-color: var(--gold); }
 @keyframes fu { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+
 .cardImg { width: 85px; min-height: 85px; flex-shrink: 0; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 26px; overflow: hidden; }
 .cardImg img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.cardBody { flex: 1; padding: 11px 13px; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+.cardBody { flex: 1; padding: 10px 13px; display: flex; flex-direction: column; justify-content: center; gap: 3px; }
 .cardRow { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .cardName { font-size: 14px; font-weight: 500; color: var(--dark); line-height: 1.3; }
 .cardPrice { font-size: 15px; font-weight: 700; color: var(--brown); white-space: nowrap; flex-shrink: 0; }
 .cardDesc { font-size: 11px; color: var(--muted); font-style: italic; }
 
+/* BADGES */
+.badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.badge { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.04em; white-space: nowrap; }
+
 .footer { max-width: 720px; margin: 0 auto; padding: 18px 16px 26px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--accent); }
 .wifi { font-size: 12px; color: var(--muted); margin-bottom: 9px; }
 .wifi strong { color: var(--dark); }
 .socials { display: flex; flex-wrap: wrap; gap: 7px; }
-.soc { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--dark); background: white; transition: all 0.2s; text-decoration: none; font-family: 'Jost', sans-serif; cursor: pointer; }
+.soc { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 20px; font-size: 12px; font-weight: 500; color: var(--dark); background: white; transition: all 0.2s; text-decoration: none; font-family: 'Jost', sans-serif; }
 .soc:hover { border-color: var(--dark); background: var(--dark); color: white; }
 .review { border-color: var(--gold); color: var(--brown); }
 .review:hover { background: var(--gold); color: white; border-color: var(--gold); }
@@ -64,8 +69,9 @@
 .mPlaceholder { width: 100%; height: 130px; background: var(--accent); border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 50px; margin-bottom: 15px; }
 .mName { font-family: 'Playfair Display', serif; font-size: 23px; color: var(--dark); margin-bottom: 5px; }
 .mPrice { font-size: 21px; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
-.mDesc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.mDesc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-top: 8px; }
 
 @media (max-width: 480px) {
   .cardImg { width: 70px; min-height: 70px; font-size: 22px; }
+  .badge { font-size: 9px; padding: 2px 6px; }
 }
