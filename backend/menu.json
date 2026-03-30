@@ -13,7 +13,8 @@
           "price": "60 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a57728a9-43ca-4a37-9b96-ab64959fdf8d-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Americano 180"
         },
         {
           "id": 14,
@@ -21,7 +22,8 @@
           "price": "80 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/aae37753-2142-4fff-a822-b6d826c52cd9-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Americano with milk 180"
         },
         {
           "id": 137,
@@ -29,7 +31,8 @@
           "price": "100 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Pumpkin latte 250"
         },
         {
           "id": 138,
@@ -37,7 +40,8 @@
           "price": "120 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Pumpkin latte 400"
         },
         {
           "id": 12,
@@ -45,7 +49,8 @@
           "price": "70 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/135c8c40-514e-4da8-acef-4d46b03ad499-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Doppio 180"
         },
         {
           "id": 9,
@@ -53,7 +58,8 @@
           "price": "60 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/cf432919-0b65-4481-a5f8-19939a1fc40d-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Espresso 110"
         },
         {
           "id": 151,
@@ -61,7 +67,8 @@
           "price": "105 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/3a44c355-caae-482e-9bc1-3dc675ed9d9d-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Grinch coffee"
         },
         {
           "id": 74,
@@ -69,7 +76,8 @@
           "price": "110 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cappuccino orange 250"
         },
         {
           "id": 153,
@@ -77,7 +85,8 @@
           "price": "165 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cappuccino orange 350"
         },
         {
           "id": 15,
@@ -85,7 +94,8 @@
           "price": "80 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/249d03f9-5468-4080-8034-704d6e7e999f-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cappuccino 180"
         },
         {
           "id": 16,
@@ -93,7 +103,8 @@
           "price": "90 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/1d36c86f-afce-4605-843a-be838c0ef9b0-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cappuccino 250"
         },
         {
           "id": 17,
@@ -101,7 +112,8 @@
           "price": "100 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/68c9da58-1015-473a-ac7e-3e849c8cc319-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cappuccino 350"
         },
         {
           "id": 18,
@@ -109,7 +121,8 @@
           "price": "95 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/4e7fea0e-056d-4538-af0a-9b074026a78e-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Latte 350"
         },
         {
           "id": 19,
@@ -117,7 +130,8 @@
           "price": "110 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/6e2dd23c-c5d1-42aa-8b94-56ce6938b5b7-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Latte 450"
         },
         {
           "id": 125,
@@ -125,7 +139,8 @@
           "price": "95 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cheese pear latte 250"
         },
         {
           "id": 126,
@@ -133,7 +148,8 @@
           "price": "125 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cheese pear latte 400"
         },
         {
           "id": 71,
@@ -141,7 +157,8 @@
           "price": "80 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Macchiato 180"
         },
         {
           "id": 24,
@@ -149,7 +166,8 @@
           "price": "110 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8f5e10be-e384-49ed-9d01-df5e58dedb05-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Mochaccino 350"
         },
         {
           "id": 22,
@@ -157,7 +175,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8add47bb-085a-4339-8b0d-99194cc86463-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Raffe 250"
         },
         {
           "id": 23,
@@ -165,7 +184,8 @@
           "price": "150 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/244b7b9c-4901-4919-84c6-ea504c3fb833-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Raffe 350"
         },
         {
           "id": 124,
@@ -173,7 +193,8 @@
           "price": "220 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8ac8aaca-924e-4dbf-8b8e-79dc130b4950-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Dubai chocolate raffe 400"
         },
         {
           "id": 123,
@@ -181,7 +202,8 @@
           "price": "170 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/3bcea889-b422-4eb0-a583-9b90cde6bbe4-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Dubai chocolate raffe 250"
         },
         {
           "id": 10,
@@ -189,7 +211,8 @@
           "price": "60 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/71be9c9d-7c1f-4d6b-baed-445644c4faa5-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Filter coffee 250"
         },
         {
           "id": 11,
@@ -197,7 +220,8 @@
           "price": "70 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/376c3691-1fff-4c0f-a3dc-b4b4bf34dd73-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Filter coffee 350"
         },
         {
           "id": 20,
@@ -205,7 +229,8 @@
           "price": "90 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/04e446af-84e7-47b5-a9d9-a37e29b83872-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Flat white 180"
         },
         {
           "id": 21,
@@ -213,7 +238,8 @@
           "price": "110 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a9e547ae-7fd4-4eac-a52b-27ff3d4e8388-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Flat white 250"
         },
         {
           "id": 119,
@@ -221,7 +247,8 @@
           "price": "85 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/543e8741-2b1e-4905-91bb-eaddf3a2d6ca-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Black velvet 250"
         },
         {
           "id": 120,
@@ -229,9 +256,11 @@
           "price": "95 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a57d922c-956f-41b1-9bf6-87b44f7f408d-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Black velvet 400"
         }
-      ]
+      ],
+      "titleEn": "Espresso drinks"
     },
     {
       "id": "author",
@@ -245,7 +274,8 @@
           "price": "110 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Babyccino 250"
         },
         {
           "id": 37,
@@ -253,7 +283,8 @@
           "price": "150 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Babyccino 350"
         },
         {
           "id": 121,
@@ -261,7 +292,8 @@
           "price": "110 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/f6da4d60-8a45-4e17-a1dc-71274d74ee1c-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Mulled wine n/a rum 250"
         },
         {
           "id": 122,
@@ -269,7 +301,8 @@
           "price": "150 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/c3589f58-8433-4d27-8b59-5c08c948ae35-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Mulled wine n/a rum 400"
         },
         {
           "id": 75,
@@ -277,7 +310,8 @@
           "price": "130 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Hot chocolate 350"
         },
         {
           "id": 36,
@@ -285,7 +319,8 @@
           "price": "80 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cocoa 250"
         },
         {
           "id": 38,
@@ -293,7 +328,8 @@
           "price": "100 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cocoa 350"
         },
         {
           "id": 127,
@@ -301,7 +337,8 @@
           "price": "100 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Choco cherry cocoa 250"
         },
         {
           "id": 128,
@@ -309,7 +346,8 @@
           "price": "120 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Choco cherry cocoa 400"
         },
         {
           "id": 131,
@@ -317,7 +355,8 @@
           "price": "110 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Coloured hot chocolate 250"
         },
         {
           "id": 118,
@@ -325,7 +364,8 @@
           "price": "150 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Coloured hot chocolate 400"
         },
         {
           "id": 41,
@@ -333,7 +373,8 @@
           "price": "100 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Matcha 250"
         },
         {
           "id": 39,
@@ -341,7 +382,8 @@
           "price": "50 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Milk foam 180"
         },
         {
           "id": 40,
@@ -349,7 +391,8 @@
           "price": "60 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Milk foam 250"
         },
         {
           "id": 162,
@@ -357,7 +400,8 @@
           "price": "100 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Brewed tea 800 ml"
         },
         {
           "id": 43,
@@ -365,7 +409,8 @@
           "price": "75 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Natural tea 500"
         },
         {
           "id": 42,
@@ -373,9 +418,11 @@
           "price": "50 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Palmyra tea 500"
         }
-      ]
+      ],
+      "titleEn": "Signature drinks"
     },
     {
       "id": "cold",
@@ -389,7 +436,8 @@
           "price": "35 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/b52e50ff-f9ce-47de-9ac0-96c2d7dcda27-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cola/Fanta/Sprite 0.5"
         },
         {
           "id": 86,
@@ -397,7 +445,8 @@
           "price": "30 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Bonaqua 0.5"
         },
         {
           "id": 113,
@@ -405,7 +454,8 @@
           "price": "115 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/60343035-66f4-437e-915a-36dd09009ab6-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Monster energy"
         },
         {
           "id": 117,
@@ -413,7 +463,8 @@
           "price": "35 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/15b7f59b-797d-4607-912f-38c413ba8bad-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cola coffee"
         },
         {
           "id": 100,
@@ -421,7 +472,8 @@
           "price": "35 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Juice 0.2"
         },
         {
           "id": 107,
@@ -429,7 +481,8 @@
           "price": "40 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/c01ab9e0-8801-459c-89ff-ada16a83249a-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Lipton tea"
         },
         {
           "id": 50,
@@ -437,7 +490,8 @@
           "price": "120 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "ICE cocoa"
         },
         {
           "id": 54,
@@ -445,7 +499,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/050a984b-6acc-4899-b24a-645e2046bb9f-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "ICE latte"
         },
         {
           "id": 52,
@@ -453,7 +508,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/69845cc4-ddfc-41c9-8f96-72a3e40eccb6-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "ICE matcha"
         },
         {
           "id": 55,
@@ -461,7 +517,8 @@
           "price": "150 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "ICE raffe"
         },
         {
           "id": 103,
@@ -469,7 +526,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/9187337e-11b3-424b-aede-fd5b5d1484ed-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Nitro coffee"
         },
         {
           "id": 49,
@@ -477,7 +535,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/ddfd5a6a-b952-4abe-ae64-55b7fc6f0f80-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Aperol spritz"
         },
         {
           "id": 48,
@@ -485,7 +544,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/29288e38-85f5-4baa-85e3-ef335279a95b-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Blue lagoon"
         },
         {
           "id": 58,
@@ -493,7 +553,8 @@
           "price": "120 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cafe glace 250"
         },
         {
           "id": 56,
@@ -501,7 +562,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a8e5635f-cb99-438d-89b8-86a4d6ece133-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Bumblebee"
         },
         {
           "id": 59,
@@ -509,7 +571,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/ca2b5b76-94d1-4c47-93b0-2707602488a1-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Espresso tonic"
         },
         {
           "id": 47,
@@ -517,7 +580,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/01dcef5c-e05a-4b60-ad90-e429ecdad0df-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Classic lemonade"
         },
         {
           "id": 46,
@@ -525,7 +589,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/9b8eeb1a-6821-468c-9ddd-1a3ea7b51b71-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Mango passion lemonade"
         },
         {
           "id": 45,
@@ -533,7 +598,8 @@
           "price": "120 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/e51140f2-cd3a-4abc-8eb3-9e73747fe4a8-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Strawberry lychee lemonade"
         },
         {
           "id": 51,
@@ -541,7 +607,8 @@
           "price": "160 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Matcha orange"
         },
         {
           "id": 115,
@@ -549,7 +616,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/5f813313-4ea3-4cdc-b12b-d7b1daf172d1-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Matcha tonic"
         },
         {
           "id": 53,
@@ -557,7 +625,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/bc30ca5d-893e-4b4f-9f0c-eeb5db921c98-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Milkshake"
         },
         {
           "id": 44,
@@ -565,7 +634,8 @@
           "price": "140 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/31d59e50-b0e9-4024-bd03-8ef589f3d2f0-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Mojito"
         },
         {
           "id": 57,
@@ -573,7 +643,8 @@
           "price": "140 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Frappe"
         },
         {
           "id": 60,
@@ -581,9 +652,11 @@
           "price": "80 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Freddo coffee 250"
         }
-      ]
+      ],
+      "titleEn": "Cold drinks"
     },
     {
       "id": "food",
@@ -597,7 +670,8 @@
           "price": "70 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/86b948e0-93cc-4aed-987d-0dbf76262ea5-image.png",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Hot dog"
         },
         {
           "id": 166,
@@ -605,7 +679,8 @@
           "price": "270 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/572e83e9-58b4-4dba-bf15-3cf7bf99f362-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Premium quiche"
         },
         {
           "id": 167,
@@ -613,7 +688,8 @@
           "price": "220 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/adfb8344-a813-4d33-86a7-80d3557e2c2e-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Quiche"
         },
         {
           "id": 169,
@@ -621,7 +697,8 @@
           "price": "120 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Ham & cheese sandwich"
         },
         {
           "id": 170,
@@ -629,7 +706,8 @@
           "price": "140 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Chicken cheddar sandwich"
         },
         {
           "id": 171,
@@ -637,7 +715,8 @@
           "price": "130 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Ham & cheese croissant"
         },
         {
           "id": 172,
@@ -645,7 +724,8 @@
           "price": "130 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Nutella banana croissant"
         },
         {
           "id": 173,
@@ -653,7 +733,8 @@
           "price": "150 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Smash chicken croissant"
         },
         {
           "id": 174,
@@ -661,7 +742,8 @@
           "price": "150 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cheesecake"
         },
         {
           "id": 175,
@@ -669,9 +751,11 @@
           "price": "140 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Chicken cheese crepe"
         }
-      ]
+      ],
+      "titleEn": "Food"
     },
     {
       "id": "sweets",
@@ -685,7 +769,8 @@
           "price": "40 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/2ace529e-62ce-4a60-9ecc-8a3b846d87d3-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Kinder cereals"
         },
         {
           "id": 80,
@@ -693,7 +778,8 @@
           "price": "40 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/f0457063-c80c-402d-8235-87f46757bb99-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Nut with condensed milk"
         },
         {
           "id": 83,
@@ -701,7 +787,8 @@
           "price": "35 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/30126660-f54a-4ac2-bad3-049bc754d6d8-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Lollipop"
         },
         {
           "id": 82,
@@ -709,7 +796,8 @@
           "price": "55 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/11229507-cf5a-4b48-a180-6323fa396c03-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Shaped lollipop"
         },
         {
           "id": 110,
@@ -717,7 +805,8 @@
           "price": "50 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/4e52386d-1a70-4406-b564-6cc4c6977bbc-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Freezer breath strips"
         },
         {
           "id": 112,
@@ -725,7 +814,8 @@
           "price": "15 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/bbb25ced-ae58-42a5-b098-bbc0af7fad2f-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Fortune cookie"
         },
         {
           "id": 158,
@@ -733,7 +823,8 @@
           "price": "110 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/fc80b52a-f7b5-43df-8839-c544959862ba-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Premium macaron"
         },
         {
           "id": 165,
@@ -741,7 +832,8 @@
           "price": "170 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Large tart"
         },
         {
           "id": 164,
@@ -749,7 +841,8 @@
           "price": "110 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Small tart"
         },
         {
           "id": 81,
@@ -757,7 +850,8 @@
           "price": "80 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/6d20b5b4-38d9-4bf8-b10f-f3d72319cef5-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Tube with condensed milk"
         },
         {
           "id": 144,
@@ -765,7 +859,8 @@
           "price": "40 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/766dd463-ab44-4e1f-91d8-df97fa6d64bb-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Liqueur candies"
         },
         {
           "id": 163,
@@ -773,9 +868,11 @@
           "price": "170 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Cheesecake"
         }
-      ]
+      ],
+      "titleEn": "Sweets"
     },
     {
       "id": "beans",
@@ -789,7 +886,8 @@
           "price": "380 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Ethiopia 200g"
         },
         {
           "id": 88,
@@ -797,7 +895,8 @@
           "price": "300 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Gourmetto 200g"
         },
         {
           "id": 90,
@@ -805,7 +904,8 @@
           "price": "300 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Guatemala 200g"
         },
         {
           "id": 89,
@@ -813,7 +913,8 @@
           "price": "340 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Italy blend 200g"
         },
         {
           "id": 129,
@@ -821,7 +922,8 @@
           "price": "340 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Santos / Brazil 200g"
         },
         {
           "id": 130,
@@ -829,7 +931,8 @@
           "price": "1455 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Zavari Santos 1kg"
         },
         {
           "id": 142,
@@ -837,9 +940,11 @@
           "price": "60 ₴",
           "photo": "",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "Drip coffee"
         }
-      ]
+      ],
+      "titleEn": "Coffee beans"
     },
     {
       "id": "merch",
@@ -853,9 +958,11 @@
           "price": "200 ₴",
           "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8499b3bd-1962-4c51-9e40-a57859200557-image.jpeg",
           "description": "",
-          "visible": true
+          "visible": true,
+          "nameEn": "PerkUP tumbler"
         }
-      ]
+      ],
+      "titleEn": "PerkUP Merch"
     }
   ]
 }

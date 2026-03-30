@@ -26,6 +26,28 @@
   font-weight: 400;
   margin-top: 4px;
 }
+.langToggle {
+  display: flex;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.langBtn {
+  padding: 5px 13px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,0.45);
+  transition: all 0.2s;
+}
+.langActive {
+  background: var(--gold);
+  color: white;
+  border-radius: 20px;
+}
 
 /* SEARCH */
 .searchWrap {

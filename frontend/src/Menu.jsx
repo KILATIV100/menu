@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Menu.module.css';
 
 const SOCIALS = {
@@ -8,27 +8,32 @@ const SOCIALS = {
   wifi: 'PerkUP_guest',
 };
 
+const T = {
+  uk: { search: 'Пошук по меню...', all: 'Все', items: 'позицій', nothing: 'Нічого не знайдено', loading: 'Завантаження меню...', wifi: 'Вільний доступ', review: 'Залишити відгук' },
+  en: { search: 'Search menu...', all: 'All', items: 'items', nothing: 'Nothing found', loading: 'Loading menu...', wifi: 'Free access', review: 'Leave a review' },
+};
+
 export default function Menu({ menuData, loading, onAdminClick }) {
+  const [lang, setLang] = useState('uk');
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [modal, setModal] = useState(null);
   const [openSections, setOpenSections] = useState({});
-  const searchRef = useRef();
 
+  const t = T[lang];
   const sections = menuData?.sections?.filter(s => s.visible) || [];
 
-  // Auto-open first 3 sections
   useEffect(() => {
     if (sections.length) {
       const init = {};
       sections.forEach((s, i) => { if (i < 3) init[s.id] = true; });
       setOpenSections(init);
     }
-  }, [menuData]);
+  }, [menuData]); // eslint-disable-line
 
-  const toggleSection = (id) => {
-    setOpenSections(prev => ({ ...prev, [id]: !prev[id] }));
-  };
+  const toggleSection = id => setOpenSections(p => ({ ...p, [id]: !p[id] }));
+  const getName = item => (lang === 'en' && item.nameEn) ? item.nameEn : item.name;
+  const getTitle = sec => (lang === 'en' && sec.titleEn) ? sec.titleEn : sec.title;
 
   const filteredSections = sections
     .filter(s => activeFilter === 'all' || s.id === activeFilter)
@@ -37,83 +42,51 @@ export default function Menu({ menuData, loading, onAdminClick }) {
       items: s.items.filter(item => {
         if (!item.visible) return false;
         if (!search) return true;
-        return item.name.toLowerCase().includes(search.toLowerCase());
+        return getName(item).toLowerCase().includes(search.toLowerCase());
       }),
     }))
     .filter(s => s.items.length > 0);
 
   return (
     <div className={styles.page}>
-      {/* TOP BAR */}
       <header className={styles.topbar}>
         <div className={styles.logo}>
           Perk<span>UP</span>
           <small>Крона Парк 2 · Бровари</small>
         </div>
+        <div className={styles.langToggle}>
+          <button className={`${styles.langBtn} ${lang === 'uk' ? styles.langActive : ''}`} onClick={() => setLang('uk')}>UA</button>
+          <button className={`${styles.langBtn} ${lang === 'en' ? styles.langActive : ''}`} onClick={() => setLang('en')}>EN</button>
+        </div>
       </header>
 
-      {/* SEARCH */}
       <div className={styles.searchWrap}>
         <span className={styles.searchIcon}>🔍</span>
-        <input
-          ref={searchRef}
-          className={styles.searchInput}
-          type="text"
-          placeholder="Пошук по меню..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-        {search && (
-          <button className={styles.searchClear} onClick={() => setSearch('')}>✕</button>
-        )}
+        <input className={styles.searchInput} type="text" placeholder={t.search} value={search} onChange={e => setSearch(e.target.value)} />
+        {search && <button className={styles.searchClear} onClick={() => setSearch('')}>✕</button>}
       </div>
 
-      {/* FILTERS */}
       <div className={styles.filterScroll}>
-        <button
-          className={`${styles.chip} ${activeFilter === 'all' ? styles.chipActive : ''}`}
-          onClick={() => setActiveFilter('all')}
-        >
-          ✨ Все
-        </button>
+        <button className={`${styles.chip} ${activeFilter === 'all' ? styles.chipActive : ''}`} onClick={() => setActiveFilter('all')}>✨ {t.all}</button>
         {sections.map(s => (
-          <button
-            key={s.id}
-            className={`${styles.chip} ${activeFilter === s.id ? styles.chipActive : ''}`}
-            onClick={() => setActiveFilter(s.id)}
-          >
-            {s.icon} {s.title}
+          <button key={s.id} className={`${styles.chip} ${activeFilter === s.id ? styles.chipActive : ''}`} onClick={() => setActiveFilter(s.id)}>
+            {s.icon} {getTitle(s)}
           </button>
         ))}
       </div>
 
-      {/* MENU BODY */}
       <div className={styles.body}>
-        {loading && (
-          <div className={styles.loader}>
-            <div className={styles.loaderIcon}>☕</div>
-            <p>Завантаження меню...</p>
-          </div>
-        )}
-
-        {!loading && filteredSections.length === 0 && (
-          <div className={styles.empty}>
-            <div>🔍</div>
-            <p>Нічого не знайдено</p>
-          </div>
-        )}
+        {loading && <div className={styles.loader}><div className={styles.loaderIcon}>☕</div><p>{t.loading}</p></div>}
+        {!loading && filteredSections.length === 0 && <div className={styles.empty}><div>🔍</div><p>{t.nothing}</p></div>}
 
         {filteredSections.map(sec => (
           <div key={sec.id} className={styles.section}>
-            <button
-              className={`${styles.sectionHeader} ${openSections[sec.id] ? styles.sectionOpen : ''}`}
-              onClick={() => toggleSection(sec.id)}
-            >
+            <button className={`${styles.sectionHeader} ${openSections[sec.id] ? styles.sectionOpen : ''}`} onClick={() => toggleSection(sec.id)}>
               <div className={styles.sectionLeft}>
                 <span className={styles.sectionIcon}>{sec.icon}</span>
                 <div>
-                  <div className={styles.sectionTitle}>{sec.title}</div>
-                  <div className={styles.sectionCount}>{sec.items.length} позицій</div>
+                  <div className={styles.sectionTitle}>{getTitle(sec)}</div>
+                  <div className={styles.sectionCount}>{sec.items.filter(i => i.visible).length} {t.items}</div>
                 </div>
               </div>
               <span className={styles.chevron}>{openSections[sec.id] ? '▲' : '▼'}</span>
@@ -122,21 +95,15 @@ export default function Menu({ menuData, loading, onAdminClick }) {
             {openSections[sec.id] && (
               <div className={styles.sectionItems}>
                 {sec.items.map((item, idx) => (
-                  <div
-                    key={item.id}
-                    className={styles.card}
-                    style={{ animationDelay: `${idx * 35}ms` }}
-                    onClick={() => setModal({ item, sec })}
-                  >
+                  <div key={item.id} className={styles.card} style={{ animationDelay: `${idx * 35}ms` }} onClick={() => setModal({ item, sec })}>
                     <div className={styles.cardImg}>
                       {item.photo
-                        ? <img src={item.photo} alt={item.name} loading="lazy" onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = sec.icon; }} />
-                        : <span>{sec.icon}</span>
-                      }
+                        ? <img src={item.photo} alt={getName(item)} loading="lazy" onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = `<span>${sec.icon}</span>`; }} />
+                        : <span>{sec.icon}</span>}
                     </div>
                     <div className={styles.cardBody}>
                       <div className={styles.cardTop}>
-                        <span className={styles.cardName}>{item.name}</span>
+                        <span className={styles.cardName}>{getName(item)}</span>
                         <span className={styles.cardPrice}>{item.price}</span>
                       </div>
                       {item.description && <div className={styles.cardDesc}>{item.description}</div>}
@@ -149,12 +116,11 @@ export default function Menu({ menuData, loading, onAdminClick }) {
         ))}
       </div>
 
-      {/* FOOTER */}
       <footer className={styles.footer}>
         <div className={styles.footerInfo}>
           <div className={styles.wifiRow}>
             <span>📶</span>
-            <span>Wi-Fi: <strong>{SOCIALS.wifi}</strong> · Вільний доступ</span>
+            <span>Wi-Fi: <strong>{SOCIALS.wifi}</strong> · {t.wifi}</span>
           </div>
           <div className={styles.socialRow}>
             <a href={SOCIALS.instagram} target="_blank" rel="noreferrer" className={styles.socialBtn}>
@@ -165,24 +131,20 @@ export default function Menu({ menuData, loading, onAdminClick }) {
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
               Telegram
             </a>
-            <a href={SOCIALS.google} target="_blank" rel="noreferrer" className={`${styles.socialBtn} ${styles.reviewBtn}`}>
-              ⭐ Залишити відгук
-            </a>
+            <a href={SOCIALS.google} target="_blank" rel="noreferrer" className={`${styles.socialBtn} ${styles.reviewBtn}`}>⭐ {t.review}</a>
           </div>
         </div>
         <button className={styles.adminTrigger} onClick={onAdminClick}>· · ·</button>
       </footer>
 
-      {/* MODAL */}
       {modal && (
         <div className={styles.modalOverlay} onClick={() => setModal(null)}>
           <div className={styles.modalBox} onClick={e => e.stopPropagation()}>
             <button className={styles.modalClose} onClick={() => setModal(null)}>✕</button>
             {modal.item.photo
-              ? <img className={styles.modalImg} src={modal.item.photo} alt={modal.item.name} onError={e => e.target.style.display = 'none'} />
-              : <div className={styles.modalImgPlaceholder}>{modal.sec.icon}</div>
-            }
-            <div className={styles.modalName}>{modal.item.name}</div>
+              ? <img className={styles.modalImg} src={modal.item.photo} alt={getName(modal.item)} onError={e => e.target.style.display = 'none'} />
+              : <div className={styles.modalImgPlaceholder}>{modal.sec.icon}</div>}
+            <div className={styles.modalName}>{getName(modal.item)}</div>
             <div className={styles.modalPrice}>{modal.item.price}</div>
             {modal.item.description && <div className={styles.modalDesc}>{modal.item.description}</div>}
           </div>
