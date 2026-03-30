@@ -222,7 +222,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);ove
   </div>
   <div class="menu-body" id="menu-body"></div>
   <div class="pub-footer">
-    <div class="pub-footer-info"><div>Wi-Fi: <strong>PerkUP_guest</strong></div><div>Telegram: <strong>t.me/perkup_news</strong></div></div>
+    <div class="pub-footer-info"><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div>Telegram: <strong>@PerkUPBot</strong></div></div>
     <button class="admin-trigger" onclick="openAdmin()">· · ·</button>
   </div>
 </div>
@@ -348,18 +348,7 @@ var defaultData={location:"Крона Парк 2",sections:[
 {name:{uk:"Пін-значок",en:"Pin Badge"},note:{uk:"набір 3 шт",en:"set of 3"},price:"120 ₴",badge:"",photo:"",allergens:[],visible:true},
 {name:{uk:"Листівка + зерна",en:"Card + Beans"},note:{uk:"подарунковий набір",en:"gift set"},price:"380 ₴",badge:"hot",photo:"",allergens:[],visible:true}]}
 ]};
-var menuData=JSON.parse(localStorage.getItem('perkup_menu_v2')||'null')||defaultData;
-menuData.sections.forEach(function(sec){
-  if(typeof sec.title==='string')sec.title={uk:sec.title,en:sec.title};
-  if(!sec.desc||typeof sec.desc==='string')sec.desc={uk:sec.desc||'',en:sec.desc||''};
-  sec.items.forEach(function(item){
-    if(typeof item.name==='string')item.name={uk:item.name,en:item.name};
-    if(!item.note||typeof item.note==='string')item.note={uk:item.note||'',en:item.note||''};
-    if(item.visible===undefined)item.visible=true;
-    if(!item.allergens)item.allergens=[];
-    if(!item.photo)item.photo='';
-  });
-});
+var menuData=defaultData;
 function getStats(){return JSON.parse(localStorage.getItem('pu_stats')||'{"total":0,"days":{},"cats":{}}');}
 function saveStats(s){localStorage.setItem('pu_stats',JSON.stringify(s));}
 function trackView(){var s=getStats();s.total=(s.total||0)+1;var d=new Date().toISOString().slice(0,10);s.days[d]=(s.days[d]||0)+1;saveStats(s);}
@@ -570,8 +559,70 @@ function delItem(si,ii){menuData.sections[si].items.splice(ii,1);renderItems(si)
 function addItem(si){menuData.sections[si].items.push({name:{uk:'Нова позиція',en:'New item'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',composition:'',visible:true});renderItems(si);markUnsaved();renderMenu();}
 function delSec(si){if(!confirm('Видалити секцію?'))return;menuData.sections.splice(si,1);renderEditor();markUnsaved();renderMenu();renderPrint();}
 function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:{uk:'Нова секція',en:'New section'},desc:{uk:'',en:''},items:[{name:{uk:'Позиція 1',en:'Item 1'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',composition:'',visible:true}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
+var GS_URL='https://script.google.com/macros/s/AKfycbwo0xmoYjtoCQo8B4HhoJurWT6ckdklEtwHcPXEdvFBjDSAu_EBi4oRF6kFBbwLv1BX/exec';
+
 function markUnsaved(){var s=document.getElementById('save-status');if(s)s.textContent='⚠ Є незбережені зміни';}
-function saveData(){localStorage.setItem('perkup_menu_v2',JSON.stringify(menuData));var s=document.getElementById('save-status');if(s)s.textContent='✓ Збережено';setTimeout(function(){if(s)s.textContent='Всі зміни збережено';},2000);}
+
+function saveData(){
+  var s=document.getElementById('save-status');
+  if(s)s.textContent='⏳ Збереження...';
+  var json=JSON.stringify(menuData);
+  // Зберігаємо локально як резерв
+  try{localStorage.setItem('perkup_menu_v2',json);}catch(e){}
+  // Відправляємо в Google Sheets
+  fetch(GS_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain'},
+    body:json
+  }).then(function(){
+    if(s)s.textContent='✓ Збережено для всіх';
+    setTimeout(function(){if(s)s.textContent='Всі зміни збережено';},2500);
+  }).catch(function(err){
+    if(s)s.textContent='⚠ Помилка з\'єднання — збережено локально';
+    console.error(err);
+  });
+}
+
+function loadMenuData(callback){
+  // Показуємо локальні дані одразу поки чекаємо сервер
+  var local=null;
+  try{local=JSON.parse(localStorage.getItem('perkup_menu_v2'));}catch(e){}
+  if(local){menuData=normalizeData(local);callback();}
+
+  // Підтягуємо актуальні дані з Google Sheets
+  fetch(GS_URL+'?t='+Date.now())
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data&&data.sections){
+        menuData=normalizeData(data);
+        try{localStorage.setItem('perkup_menu_v2',JSON.stringify(menuData));}catch(e){}
+        callback();
+      }
+    })
+    .catch(function(){
+      // Якщо сервер недоступний — залишаємо локальні дані
+      if(!local){menuData=normalizeData(defaultData);callback();}
+    });
+}
+
+function normalizeData(data){
+  if(!data||!data.sections)return defaultData;
+  data.sections.forEach(function(sec){
+    if(typeof sec.title==='string')sec.title={uk:sec.title,en:sec.title};
+    if(!sec.desc||typeof sec.desc==='string')sec.desc={uk:sec.desc||'',en:sec.desc||''};
+    if(sec.visible===undefined)sec.visible=true;
+    sec.items.forEach(function(item){
+      if(typeof item.name==='string')item.name={uk:item.name,en:item.name};
+      if(!item.note||typeof item.note==='string')item.note={uk:item.note||'',en:item.note||''};
+      if(item.visible===undefined)item.visible=true;
+      if(!item.allergens)item.allergens=[];
+      if(!item.photo)item.photo='';
+      if(!item.composition)item.composition='';
+    });
+  });
+  return data;
+}
 
 // ── DRAG & DROP — використовує drop, не перерендерює на dragover ──
 var _dragSec=null,_dragSecIdx=null;
@@ -652,8 +703,18 @@ function showATab(name,btn){
   if(name==='qr')setTimeout(generateQR,50);
 }
 window.onload=function(){
-  trackView();renderMenu();buildFilters();
-  if(sessionStorage.getItem('pu_adm')==='1'){isAdmin=true;document.getElementById('admin-login-wrap').style.display='none';document.getElementById('admin-content').classList.add('open');}
+  trackView();
+  // Показуємо лоадер поки завантажуються дані
+  var body=document.getElementById('menu-body');
+  if(body)body.innerHTML='<div style="text-align:center;padding:60px 20px;color:var(--muted);"><div style="font-size:32px;margin-bottom:12px;">☕</div><p>Завантаження меню...</p></div>';
+  loadMenuData(function(){
+    renderMenu();buildFilters();
+  });
+  if(sessionStorage.getItem('pu_adm')==='1'){
+    isAdmin=true;
+    document.getElementById('admin-login-wrap').style.display='none';
+    document.getElementById('admin-content').classList.add('open');
+  }
 };
 </script>
 </body>
