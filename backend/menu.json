@@ -1,0 +1,861 @@
+{
+  "location": "Крона Парк 2",
+  "sections": [
+    {
+      "id": "coffee",
+      "icon": "☕",
+      "title": "Еспресо-напої",
+      "visible": true,
+      "items": [
+        {
+          "id": 13,
+          "name": "Американо 180",
+          "price": "60 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a57728a9-43ca-4a37-9b96-ab64959fdf8d-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 14,
+          "name": "Американо з молоком 180",
+          "price": "80 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/aae37753-2142-4fff-a822-b6d826c52cd9-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 137,
+          "name": "Гарбузове лате 250",
+          "price": "100 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 138,
+          "name": "Гарбузове лате 400",
+          "price": "120 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 12,
+          "name": "Допіо 180",
+          "price": "70 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/135c8c40-514e-4da8-acef-4d46b03ad499-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 9,
+          "name": "Еспресо 110",
+          "price": "60 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/cf432919-0b65-4481-a5f8-19939a1fc40d-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 151,
+          "name": "Кава Грінч",
+          "price": "105 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/3a44c355-caae-482e-9bc1-3dc675ed9d9d-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 74,
+          "name": "Капуоранж 250",
+          "price": "110 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 153,
+          "name": "Капуоранж 350",
+          "price": "165 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 15,
+          "name": "Капучино 180",
+          "price": "80 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/249d03f9-5468-4080-8034-704d6e7e999f-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 16,
+          "name": "Капучино 250",
+          "price": "90 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/1d36c86f-afce-4605-843a-be838c0ef9b0-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 17,
+          "name": "Капучино 350",
+          "price": "100 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/68c9da58-1015-473a-ac7e-3e849c8cc319-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 18,
+          "name": "Лате 350",
+          "price": "95 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/4e7fea0e-056d-4538-af0a-9b074026a78e-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 19,
+          "name": "Лате 450",
+          "price": "110 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/6e2dd23c-c5d1-42aa-8b94-56ce6938b5b7-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 125,
+          "name": "Лате сирна груша 250",
+          "price": "95 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 126,
+          "name": "Лате сирна груша 400",
+          "price": "125 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 71,
+          "name": "Макиато (еспресо з молоком) 180",
+          "price": "80 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 24,
+          "name": "Мокачино 350",
+          "price": "110 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8f5e10be-e384-49ed-9d01-df5e58dedb05-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 22,
+          "name": "Раф 250",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8add47bb-085a-4339-8b0d-99194cc86463-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 23,
+          "name": "Раф 350",
+          "price": "150 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/244b7b9c-4901-4919-84c6-ea504c3fb833-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 124,
+          "name": "Раф Дубайский шоколад 400",
+          "price": "220 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8ac8aaca-924e-4dbf-8b8e-79dc130b4950-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 123,
+          "name": "Раф дубайський шоколад 250",
+          "price": "170 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/3bcea889-b422-4eb0-a583-9b90cde6bbe4-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 10,
+          "name": "Фільтр кава 250",
+          "price": "60 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/71be9c9d-7c1f-4d6b-baed-445644c4faa5-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 11,
+          "name": "Фільтр кава 350",
+          "price": "70 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/376c3691-1fff-4c0f-a3dc-b4b4bf34dd73-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 20,
+          "name": "Флет уайт 180",
+          "price": "90 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/04e446af-84e7-47b5-a9d9-a37e29b83872-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 21,
+          "name": "Флет уайт 250",
+          "price": "110 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a9e547ae-7fd4-4eac-a52b-27ff3d4e8388-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 119,
+          "name": "Чорний оксамит 250",
+          "price": "85 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/543e8741-2b1e-4905-91bb-eaddf3a2d6ca-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 120,
+          "name": "Чорний оксамит 400",
+          "price": "95 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a57d922c-956f-41b1-9bf6-87b44f7f408d-image.jpeg",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "author",
+      "icon": "✨",
+      "title": "Авторські напої",
+      "visible": true,
+      "items": [
+        {
+          "id": 35,
+          "name": "Бебічино 250",
+          "price": "110 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 37,
+          "name": "Бебічино 350",
+          "price": "150 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 121,
+          "name": "Глінтвейн з б/а ромом 250",
+          "price": "110 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/f6da4d60-8a45-4e17-a1dc-71274d74ee1c-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 122,
+          "name": "Глінтвейн з б/а ромом 400",
+          "price": "150 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/c3589f58-8433-4d27-8b59-5c08c948ae35-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 75,
+          "name": "Горячий шоколад 350",
+          "price": "130 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 36,
+          "name": "Какао 250",
+          "price": "80 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 38,
+          "name": "Какао 350",
+          "price": "100 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 127,
+          "name": "Какао шокочері 250",
+          "price": "100 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 128,
+          "name": "Какао шокочері 400",
+          "price": "120 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 131,
+          "name": "Кольоровий горячий шоколад 250",
+          "price": "110 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 118,
+          "name": "Кольоровий горячий шоколад 400",
+          "price": "150 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 41,
+          "name": "Матча 250",
+          "price": "100 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 39,
+          "name": "Молочна пінка 180",
+          "price": "50 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 40,
+          "name": "Молочна пінка 250",
+          "price": "60 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 162,
+          "name": "Чай заварний 800 мл",
+          "price": "100 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 43,
+          "name": "Чай натуральний 500",
+          "price": "75 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 42,
+          "name": "Чай Палміра 500",
+          "price": "50 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "cold",
+      "icon": "🧊",
+      "title": "Холодні напої",
+      "visible": true,
+      "items": [
+        {
+          "id": 92,
+          "name": "Кола/фанта/спрайт 0,5",
+          "price": "35 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/b52e50ff-f9ce-47de-9ac0-96c2d7dcda27-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 86,
+          "name": "Бонаква 0,5",
+          "price": "30 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 113,
+          "name": "Енергетик МОНСТР",
+          "price": "115 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/60343035-66f4-437e-915a-36dd09009ab6-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 117,
+          "name": "Кола кава",
+          "price": "35 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/15b7f59b-797d-4607-912f-38c413ba8bad-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 100,
+          "name": "Сік 0,2",
+          "price": "35 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 107,
+          "name": "Чай Ліптон",
+          "price": "40 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/c01ab9e0-8801-459c-89ff-ada16a83249a-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 50,
+          "name": "ICE-какао",
+          "price": "120 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 54,
+          "name": "ICE-лате",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/050a984b-6acc-4899-b24a-645e2046bb9f-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 52,
+          "name": "ICE-матча",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/69845cc4-ddfc-41c9-8f96-72a3e40eccb6-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 55,
+          "name": "ICE-раф",
+          "price": "150 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 103,
+          "name": "Nitro кава",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/9187337e-11b3-424b-aede-fd5b5d1484ed-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 49,
+          "name": "Апероль",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/ddfd5a6a-b952-4abe-ae64-55b7fc6f0f80-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 48,
+          "name": "Блакитна лагуна",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/29288e38-85f5-4baa-85e3-ef335279a95b-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 58,
+          "name": "Глясе 250",
+          "price": "120 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 56,
+          "name": "Джміль (Бамбл)",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/a8e5635f-cb99-438d-89b8-86a4d6ece133-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 59,
+          "name": "Еспресо-тонік",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/ca2b5b76-94d1-4c47-93b0-2707602488a1-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 47,
+          "name": "Лимонад класичний",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/01dcef5c-e05a-4b60-ad90-e429ecdad0df-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 46,
+          "name": "Лимонад манго маракуя",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/9b8eeb1a-6821-468c-9ddd-1a3ea7b51b71-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 45,
+          "name": "Лимонад полуниця лічі",
+          "price": "120 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/e51140f2-cd3a-4abc-8eb3-9e73747fe4a8-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 51,
+          "name": "Матча оранж",
+          "price": "160 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 115,
+          "name": "Матча тонік",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/5f813313-4ea3-4cdc-b12b-d7b1daf172d1-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 53,
+          "name": "Молочний коктейль",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/bc30ca5d-893e-4b4f-9f0c-eeb5db921c98-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 44,
+          "name": "Мохіто",
+          "price": "140 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/31d59e50-b0e9-4024-bd03-8ef589f3d2f0-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 57,
+          "name": "Фрапе",
+          "price": "140 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 60,
+          "name": "Фредо кава 250",
+          "price": "80 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "icon": "🥐",
+      "title": "Їжа",
+      "visible": true,
+      "items": [
+        {
+          "id": 64,
+          "name": "Хот-дог",
+          "price": "70 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/86b948e0-93cc-4aed-987d-0dbf76262ea5-image.png",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 166,
+          "name": "Преміум кіш",
+          "price": "270 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/572e83e9-58b4-4dba-bf15-3cf7bf99f362-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 167,
+          "name": "Кіш",
+          "price": "220 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/adfb8344-a813-4d33-86a7-80d3557e2c2e-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 169,
+          "name": "Сендвіч шинка та сир",
+          "price": "120 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 170,
+          "name": "Сендвіч курка чедер",
+          "price": "140 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 171,
+          "name": "Круасан шинка сир",
+          "price": "130 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 172,
+          "name": "Круасан нутелла банан",
+          "price": "130 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 173,
+          "name": "Круасан smash курка",
+          "price": "150 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 174,
+          "name": "Сирник",
+          "price": "150 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 175,
+          "name": "Блинчик курка сир",
+          "price": "140 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "sweets",
+      "icon": "🍰",
+      "title": "Солоденьке",
+      "visible": true,
+      "items": [
+        {
+          "id": 145,
+          "name": "Kinder злаки",
+          "price": "40 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/2ace529e-62ce-4a60-9ecc-8a3b846d87d3-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 80,
+          "name": "Горішок з згущеним молоком",
+          "price": "40 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/f0457063-c80c-402d-8235-87f46757bb99-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 83,
+          "name": "Льодяник",
+          "price": "35 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/30126660-f54a-4ac2-bad3-049bc754d6d8-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 82,
+          "name": "Льодяник фігурний",
+          "price": "55 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/11229507-cf5a-4b48-a180-6323fa396c03-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 110,
+          "name": "Освіжаючий пластини Freezer",
+          "price": "50 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/4e52386d-1a70-4406-b564-6cc4c6977bbc-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 112,
+          "name": "Печиво з передбаченням",
+          "price": "15 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/bbb25ced-ae58-42a5-b098-bbc0af7fad2f-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 158,
+          "name": "Преміум макарон",
+          "price": "110 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/fc80b52a-f7b5-43df-8839-c544959862ba-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 165,
+          "name": "Тарт великий",
+          "price": "170 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 164,
+          "name": "Тарт маленький",
+          "price": "110 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 81,
+          "name": "Трубочка з згущеним молоком",
+          "price": "80 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/6d20b5b4-38d9-4bf8-b10f-f3d72319cef5-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 144,
+          "name": "Цукерки з лікером",
+          "price": "40 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/766dd463-ab44-4e1f-91d8-df97fa6d64bb-image.jpeg",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 163,
+          "name": "Чізкейк",
+          "price": "170 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "beans",
+      "icon": "🌱",
+      "title": "Кава в зернах",
+      "visible": true,
+      "items": [
+        {
+          "id": 87,
+          "name": "Zavari Ethiopia 200 гр",
+          "price": "380 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 88,
+          "name": "Zavari Gourmetto 200 гр",
+          "price": "300 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 90,
+          "name": "Zavari Guatemala 200 гр",
+          "price": "300 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 89,
+          "name": "Zavari Italy blend 200 гр",
+          "price": "340 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 129,
+          "name": "Zavari Santos / Brazil 200 гр",
+          "price": "340 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 130,
+          "name": "Zavari Santos 1кг",
+          "price": "1455 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        },
+        {
+          "id": 142,
+          "name": "Дріп кава",
+          "price": "60 ₴",
+          "photo": "",
+          "description": "",
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": "merch",
+      "icon": "🎁",
+      "title": "Мерч PerkUP",
+      "visible": true,
+      "items": [
+        {
+          "id": 111,
+          "name": "Стакан PerkUP",
+          "price": "200 ₴",
+          "photo": "https://img.postershop.me/69c26df494b7690e96c23c63/8499b3bd-1962-4c51-9e40-a57859200557-image.jpeg",
+          "description": "",
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
