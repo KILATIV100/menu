@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerkUP — Крона Парк 2</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');
+  :root{--cream:#F9F5EF;--dark:#1C1A17;--brown:#6B4F3A;--gold:#C4973A;--accent:#E8DDD0;--muted:#8B7B6B;--green:#3D5A3E;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);}
+
+  /* ======= ПУБЛІЧНЕ МЕНЮ ======= */
+  #page-menu{max-width:680px;margin:0 auto;padding:0 16px 40px;}
+  .menu-header{text-align:center;padding:40px 0 24px;border-bottom:1px solid var(--accent);margin-bottom:32px;}
+  .logo-text{font-family:'Playfair Display',serif;font-size:44px;letter-spacing:-0.02em;color:var(--dark);line-height:1;}
+  .logo-text span{color:var(--gold);}
+  .subtitle{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-top:8px;}
+  .section-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown);margin:32px 0 4px;display:flex;align-items:center;gap:12px;}
+  .section-title::after{content:'';flex:1;height:1px;background:var(--accent);}
+  .section-desc{font-size:12px;color:var(--muted);letter-spacing:0.05em;margin-bottom:16px;font-style:italic;}
+  .menu-item{display:flex;align-items:baseline;justify-content:space-between;padding:11px 0;border-bottom:1px dashed rgba(107,79,58,0.15);}
+  .menu-item:last-child{border-bottom:none;}
+  .item-info{flex:1;}
+  .item-name{font-size:15px;font-weight:500;color:var(--dark);}
+  .item-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;}
+  .item-price{font-size:15px;font-weight:600;color:var(--brown);min-width:70px;text-align:right;white-space:nowrap;}
+  .badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle;}
+  .badge-new{background:#E8F4E8;color:var(--green);}
+  .badge-hot{background:#FAEEE0;color:#B85C2A;}
+  .badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
+
+  /* Футер меню з прихованою кнопкою */
+  .menu-footer{max-width:680px;margin:0 auto;padding:24px 16px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--accent);}
+  .menu-footer-info{font-size:12px;color:var(--muted);}
+  .menu-footer-info strong{color:var(--dark);}
+  .admin-trigger{font-size:10px;color:rgba(139,123,107,0.3);background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.15em;text-transform:uppercase;padding:6px;transition:color 0.3s;}
+  .admin-trigger:hover{color:var(--muted);}
+
+  /* ======= АДМІН ПАНЕЛЬ (прихована за замовчуванням) ======= */
+  #page-admin{display:none;}
+  #page-admin.open{display:block;}
+
+  /* Логін */
+  #admin-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--dark);}
+  .login-box{background:var(--cream);border-radius:20px;padding:48px 40px;width:100%;max-width:360px;text-align:center;}
+  .login-logo{font-family:'Playfair Display',serif;font-size:36px;letter-spacing:-0.02em;color:var(--dark);line-height:1;margin-bottom:6px;}
+  .login-logo span{color:var(--gold);}
+  .login-sub{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:32px;}
+  .login-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:left;display:block;margin-bottom:8px;}
+  .login-input{width:100%;padding:13px 16px;border:1.5px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:16px;background:white;color:var(--dark);outline:none;transition:border-color 0.2s;letter-spacing:0.1em;margin-bottom:16px;text-align:center;}
+  .login-input:focus{border-color:var(--gold);}
+  .login-input.shake{animation:shake 0.35s ease;border-color:#C44;}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  .login-submit{width:100%;padding:13px;background:var(--dark);color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-bottom:8px;}
+  .login-submit:hover{background:var(--brown);}
+  .login-error{font-size:12px;color:#C44;min-height:18px;margin-top:6px;}
+  .login-hint{font-size:11px;color:var(--muted);margin-top:6px;}
+  .back-btn{width:100%;margin-top:14px;padding:11px;background:none;border:1px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--brown);color:var(--brown);}
+
+  /* Адмін контент */
+  #admin-content{display:none;}
+  #admin-content.open{display:block;}
+
+  .admin-topbar{background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+  .admin-tabs{display:flex;}
+  .atab-btn{padding:14px 16px;background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
+  .atab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+  .admin-logout{padding:8px 16px;background:none;border:1px solid rgba(255,255,255,0.2);border-radius:7px;font-family:'Jost',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
+  .admin-logout:hover{border-color:rgba(255,255,255,0.5);color:white;}
+
+  .atab-content{display:none;}
+  .atab-content.active{display:block;}
+
+  /* QR */
+  #atab-qr{max-width:480px;margin:0 auto;padding:40px 20px 60px;text-align:center;}
+  #atab-qr h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--dark);margin-bottom:8px;}
+  #atab-qr p.sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
+  .qr-url-row{display:flex;gap:8px;margin-bottom:24px;}
+  .qr-url-row input{flex:1;padding:10px 14px;border:1.5px solid var(--accent);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
+  .qr-url-row input:focus{border-color:var(--gold);}
+  .btn-gen{padding:10px 20px;background:var(--dark);color:white;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;}
+  .btn-gen:hover{background:var(--brown);}
+  .qr-box{background:white;border-radius:16px;padding:32px;margin:0 auto 24px;display:inline-block;box-shadow:0 2px 24px rgba(28,26,23,0.1);}
+  .qr-box #qrcode canvas,.qr-box #qrcode img{display:block;}
+  .qr-brand{margin-top:16px;font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);}
+  .qr-brand span{color:var(--gold);}
+  .qr-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+  .qr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+
+  /* Кнопки */
+  .btn-outline{padding:10px 22px;border:1.5px solid var(--dark);border-radius:8px;background:none;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;color:var(--dark);transition:all 0.2s;}
+  .btn-outline:hover{background:var(--dark);color:white;}
+  .btn-primary{padding:10px 22px;background:var(--gold);border:1.5px solid var(--gold);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;cursor:pointer;color:white;transition:all 0.2s;}
+  .btn-primary:hover{background:var(--brown);border-color:var(--brown);}
+
+  /* Print */
+  #atab-print{max-width:680px;margin:0 auto;padding:32px 20px 60px;}
+  .print-controls{background:white;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--accent);}
+  .print-controls h3{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;}
+  .ctrl-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
+  .ctrl-row label{font-size:13px;color:var(--muted);min-width:120px;}
+  .ctrl-row select,.ctrl-row input[type=text]{flex:1;min-width:160px;padding:7px 12px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
+  .ctrl-row select:focus,.ctrl-row input:focus{border-color:var(--gold);}
+  .print-preview{background:white;border-radius:12px;overflow:hidden;border:1px solid var(--accent);margin-bottom:20px;}
+  .print-preview-inner{padding:40px;}
+  .print-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
+
+  /* Edit */
+  #atab-edit{max-width:760px;margin:0 auto;padding:32px 20px 60px;}
+  #atab-edit h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:6px;}
+  .hint{font-size:13px;color:var(--muted);margin-bottom:24px;}
+  .section-editor{background:white;border-radius:12px;border:1px solid var(--accent);margin-bottom:20px;overflow:hidden;}
+  .sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--dark);color:white;cursor:pointer;}
+  .sec-hdr span{font-size:14px;font-weight:500;letter-spacing:0.05em;}
+  .sec-hdr .tog{font-size:18px;color:var(--gold);}
+  .sec-body{padding:16px 18px;}
+  .item-row{display:grid;grid-template-columns:1fr 1fr 80px 80px 28px;gap:8px;align-items:center;margin-bottom:8px;}
+  .item-row input,.item-row select{padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;width:100%;}
+  .item-row input:focus,.item-row select:focus{border-color:var(--gold);}
+  .btn-del{background:none;border:none;color:#C44;font-size:18px;cursor:pointer;padding:4px;border-radius:4px;}
+  .btn-del:hover{background:#fef0f0;}
+  .btn-add{margin-top:8px;padding:7px 16px;background:var(--cream);border:1px dashed var(--brown);border-radius:6px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;color:var(--brown);cursor:pointer;}
+  .btn-add:hover{background:var(--accent);}
+  .row-labels{display:grid;grid-template-columns:1fr 1fr 80px 80px 28px;gap:8px;margin-bottom:6px;}
+  .row-labels span{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);}
+
+  /* Збереження */
+  .save-bar{background:var(--dark);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0;}
+  .save-bar span{font-size:13px;color:rgba(255,255,255,0.55);}
+  .save-btn{padding:9px 28px;background:var(--gold);border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;color:white;cursor:pointer;}
+  .save-btn:hover{background:#b8883a;}
+
+  /* Print стилі */
+  .print-menu-header{text-align:center;padding-bottom:24px;margin-bottom:28px;border-bottom:2px solid var(--dark);}
+  .print-logo{font-family:'Playfair Display',serif;font-size:48px;letter-spacing:-0.02em;line-height:1;color:var(--dark);}
+  .print-logo span{color:var(--gold);}
+  .print-tagline{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+  .print-location{font-size:12px;color:var(--muted);margin-top:4px;}
+  .print-cols{display:grid;gap:32px;}
+  .print-cols.two{grid-template-columns:1fr 1fr;}
+  .print-cols.one{grid-template-columns:1fr;}
+  .print-sec-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);padding-bottom:6px;border-bottom:1px solid var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .print-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:13px;gap:8px;}
+  .print-item:last-child{border-bottom:none;}
+  .print-item-name{color:var(--dark);font-weight:400;flex:1;}
+  .print-item-note{color:var(--muted);font-style:italic;font-size:11px;}
+  .print-item-price{color:var(--brown);font-weight:600;white-space:nowrap;}
+  .print-badge{font-size:9px;padding:1px 5px;border-radius:10px;margin-left:4px;font-weight:600;}
+  .print-badge-new{background:#E8F4E8;color:var(--green);}
+  .print-badge-hot{background:#FAEEE0;color:#B85C2A;}
+  .print-badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
+  .print-footer{margin-top:28px;padding-top:16px;border-top:1px solid var(--accent);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);}
+  .qr-zone{display:flex;align-items:center;gap:12px;}
+  .qr-label{font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+
+  @media print{
+    #page-menu,#page-admin .admin-topbar,#admin-content .save-bar,#atab-qr,#atab-edit,.print-controls,.print-actions{display:none!important;}
+    #page-admin{display:block!important;}
+    #admin-content{display:block!important;}
+    #atab-print{display:block!important;padding:0;}
+    .print-preview{border:none;border-radius:0;}
+    .print-preview-inner{padding:20mm;}
+    body{background:white;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== ПУБЛІЧНЕ МЕНЮ =========== -->
+<div id="page-menu">
+  <div class="menu-header">
+    <div class="logo-text">Perk<span>UP</span></div>
+    <div class="subtitle">Крона Парк 2 · Бровари</div>
+  </div>
+  <div id="menu-render"></div>
+
+  <div class="menu-footer">
+    <div class="menu-footer-info">
+      <div>Wi-Fi: <strong>PerkUP_Free</strong></div>
+      <div style="margin-top:4px;">Telegram: <strong>@PerkUPBot</strong></div>
+    </div>
+    <button class="admin-trigger" onclick="openAdmin()">· · ·</button>
+  </div>
+</div>
+
+<!-- =========== АДМІН ПАНЕЛЬ =========== -->
+<div id="page-admin">
+
+  <!-- Екран логіну -->
+  <div id="admin-login-wrap">
+    <div class="login-box">
+      <div class="login-logo">Perk<span>UP</span></div>
+      <div class="login-sub">Адмін · Крона Парк 2</div>
+      <label class="login-label">Пароль</label>
+      <input type="password" id="login-input" class="login-input" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password"/>
+      <button class="login-submit" onclick="doLogin()">Увійти</button>
+      <div class="login-error" id="login-error"></div>
+      <div class="login-hint" id="login-hint"></div>
+      <button class="back-btn" onclick="closeAdmin()">← Повернутись до меню</button>
+    </div>
+  </div>
+
+  <!-- Контент після логіну -->
+  <div id="admin-content">
+    <div class="admin-topbar">
+      <div class="admin-tabs">
+        <button class="atab-btn active" onclick="showTab('qr',this)">QR-код</button>
+        <button class="atab-btn" onclick="showTab('print',this)">🖨 Друк</button>
+        <button class="atab-btn" onclick="showTab('edit',this)">✏️ Редагування</button>
+      </div>
+      <button class="admin-logout" onclick="doLogout()">Вийти</button>
+    </div>
+
+    <!-- QR -->
+    <div id="atab-qr" class="atab-content active">
+      <h2>QR-код меню</h2>
+      <p class="sub">Вставте посилання — QR оновиться автоматично</p>
+      <div class="qr-url-row">
+        <input type="text" id="qr-url-input" placeholder="https://perkup.com.ua/menu" value="https://perkup.com.ua/menu"/>
+        <button class="btn-gen" onclick="generateQR()">Генерувати</button>
+      </div>
+      <div class="qr-box">
+        <div id="qrcode"></div>
+        <div class="qr-brand">Perk<span>UP</span></div>
+        <div class="qr-sub">Крона Парк 2</div>
+      </div>
+      <div class="qr-actions">
+        <button class="btn-outline" onclick="downloadQR()">↓ Завантажити PNG</button>
+        <button class="btn-primary" onclick="downloadQRBranded()">↓ З брендингом</button>
+      </div>
+      <p style="margin-top:20px;font-size:12px;color:var(--muted);text-align:center;">Змініть URL → Генерувати → завантажте</p>
+    </div>
+
+    <!-- PRINT -->
+    <div id="atab-print" class="atab-content">
+      <div class="print-controls">
+        <h3>Параметри друку</h3>
+        <div class="ctrl-row">
+          <label>Колонки</label>
+          <select id="print-cols" onchange="renderPrint()">
+            <option value="two">2 колонки (A4 альбом)</option>
+            <option value="one">1 колонка (A4 портрет)</option>
+          </select>
+        </div>
+        <div class="ctrl-row">
+          <label>QR-посилання</label>
+          <input type="text" id="print-qr-url" placeholder="https://perkup.com.ua/menu" value="https://perkup.com.ua/menu" oninput="renderPrint()"/>
+        </div>
+      </div>
+      <div class="print-preview">
+        <div class="print-preview-inner" id="print-area"></div>
+      </div>
+      <div class="print-actions">
+        <button class="btn-outline" onclick="window.print()">🖨 Друкувати</button>
+        <button class="btn-primary" onclick="downloadPrintHTML()">↓ Завантажити HTML</button>
+      </div>
+    </div>
+
+    <!-- EDIT -->
+    <div id="atab-edit" class="atab-content">
+      <h2>Редагування меню</h2>
+      <p class="hint">Зміни одразу відображаються в меню і версії для друку</p>
+      <div id="editor-root"></div>
+      <div style="text-align:center;margin-top:24px;">
+        <button class="btn-outline" onclick="addSection()" style="padding:10px 28px;">+ Додати секцію</button>
+      </div>
+    </div>
+
+    <div class="save-bar">
+      <span id="save-status">Всі зміни збережено</span>
+      <button class="save-btn" onclick="saveData()">💾 Зберегти</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== AUTH =====
+function hashStr(s){let h=0x12345678;for(let i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;h^=(h>>>16);}return(h>>>0).toString(36);}
+const ADMIN_HASH=hashStr('57ba1z72');
+let isAdmin=false,failCount=0,lockUntil=0;
+const MAX_FAIL=5;
+
+function openAdmin(){
+  document.getElementById('page-menu').style.display='none';
+  document.getElementById('page-admin').classList.add('open');
+  if(!isAdmin){
+    document.getElementById('admin-login-wrap').style.display='flex';
+    document.getElementById('admin-content').classList.remove('open');
+    setTimeout(()=>document.getElementById('login-input').focus(),80);
+  }
+}
+
+function closeAdmin(){
+  document.getElementById('page-admin').classList.remove('open');
+  document.getElementById('page-menu').style.display='block';
+}
+
+function doLogin(){
+  const now=Date.now();
+  if(now<lockUntil){showErr('Заблоковано. Зачекайте '+Math.ceil((lockUntil-now)/1000)+' сек.');return;}
+  const val=document.getElementById('login-input').value;
+  if(hashStr(val)===ADMIN_HASH){
+    isAdmin=true;failCount=0;
+    sessionStorage.setItem('pu_adm','1');
+    document.getElementById('admin-login-wrap').style.display='none';
+    document.getElementById('admin-content').classList.add('open');
+    generateQR();renderPrint();
+  } else {
+    failCount++;
+    document.getElementById('login-input').value='';
+    const inp=document.getElementById('login-input');
+    inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');
+    setTimeout(()=>inp.classList.remove('shake'),400);
+    if(failCount>=MAX_FAIL){
+      lockUntil=Date.now()+30000;failCount=0;
+      const t=setInterval(()=>{
+        const s=Math.ceil((lockUntil-Date.now())/1000);
+        if(s<=0){clearInterval(t);showErr('');document.getElementById('login-hint').textContent='';}
+        else showErr('Заблоковано. Зачекайте '+s+' сек.');
+      },1000);
+    } else {
+      showErr('Невірний пароль');
+      document.getElementById('login-hint').textContent='Залишилось спроб: '+(MAX_FAIL-failCount);
+    }
+  }
+}
+
+function showErr(m){document.getElementById('login-error').textContent=m;}
+
+function doLogout(){
+  isAdmin=false;sessionStorage.removeItem('pu_adm');
+  document.getElementById('admin-login-wrap').style.display='flex';
+  document.getElementById('admin-content').classList.remove('open');
+  document.getElementById('login-input').value='';
+  showErr('');document.getElementById('login-hint').textContent='';
+  closeAdmin();
+}
+
+// ===== MENU DATA =====
+const defaultData={location:"Крона Парк 2",sections:[
+  {id:"esp",icon:"☕",title:"Еспресо-напої",desc:"Зернова суміш PerkUP Blend",items:[
+    {name:"Еспресо",note:"30 мл",price:"35 ₴",badge:""},
+    {name:"Доппіо",note:"60 мл",price:"45 ₴",badge:""},
+    {name:"Американо",note:"150 мл",price:"50 ₴",badge:""},
+    {name:"Капучино",note:"160 мл",price:"65 ₴",badge:""},
+    {name:"Флет Вайт",note:"150 мл",price:"70 ₴",badge:""},
+    {name:"Лате",note:"300 мл",price:"75 ₴",badge:""},
+    {name:"Кортадо",note:"90 мл",price:"60 ₴",badge:"hot"},
+    {name:"Рафе",note:"220 мл, вершки 35%",price:"90 ₴",badge:""}
+  ]},
+  {id:"aut",icon:"✨",title:"Авторські напої",desc:"Сезонне меню · оновлюється щомісяця",items:[
+    {name:"Карамельний лате",note:"домашня карамель, солона пінка",price:"95 ₴",badge:"hot"},
+    {name:"Пістачіо лате",note:"фісташкова паста, молоко",price:"100 ₴",badge:"seasonal"},
+    {name:"Кокос & Ваніль",note:"кокосове молоко, ваніль",price:"95 ₴",badge:"new"},
+    {name:"Матча лате",note:"церемоніальна матча",price:"90 ₴",badge:""},
+    {name:"Chai Spice",note:"масала, вівсяне молоко",price:"85 ₴",badge:"seasonal"}
+  ]},
+  {id:"tea",icon:"🫖",title:"Чай та трав'яні напої",desc:"Листовий чай, заварювання 400 мл",items:[
+    {name:"Чорний Assam",note:"класичний",price:"55 ₴",badge:""},
+    {name:"Зелений Сенча",note:"японський",price:"60 ₴",badge:""},
+    {name:"Лаванда & М'ята",note:"авторський збір",price:"65 ₴",badge:"new"},
+    {name:"Ройбос з імбиром",note:"без кофеїну",price:"65 ₴",badge:""},
+    {name:"Чабрець & Мед",note:"місцевий збір",price:"70 ₴",badge:"seasonal"}
+  ]},
+  {id:"cld",icon:"🧊",title:"Холодні напої",desc:"Cold brew, лимонади, смузі",items:[
+    {name:"Cold Brew",note:"24 год. настоювання",price:"85 ₴",badge:"hot"},
+    {name:"Нітро Cold Brew",note:"з азотом",price:"95 ₴",badge:"new"},
+    {name:"Лимонад PerkUP",note:"лимон, базилік, м'ята",price:"80 ₴",badge:""},
+    {name:"Полуниця & Маракуя",note:"сезонний лимонад",price:"85 ₴",badge:"seasonal"}
+  ]},
+  {id:"food",icon:"🥐",title:"Їжа",desc:"Щоденна випічка та снеки",items:[
+    {name:"Круасан вершковий",note:"свіжий щодня",price:"55 ₴",badge:""},
+    {name:"Круасан мигдальний",note:"заварний крем, мигдаль",price:"75 ₴",badge:"hot"},
+    {name:"Банановий хліб",note:"домашній рецепт",price:"65 ₴",badge:""},
+    {name:"Чізкейк NY",note:"порція",price:"95 ₴",badge:""},
+    {name:"Сирний сендвіч",note:"тост, гауда, помідор",price:"90 ₴",badge:""},
+    {name:"Вівсянка з ягодами",note:"рослинне молоко",price:"85 ₴",badge:"new"}
+  ]},
+  {id:"bns",icon:"🌱",title:"Кава в зернах",desc:"Обсмажена партнерською обсмажнею",items:[
+    {name:"PerkUP Blend",note:"250 г · шоколад, горіх",price:"320 ₴",badge:""},
+    {name:"Ethiopia Yirgacheffe",note:"250 г · квіти, цитрус",price:"420 ₴",badge:"seasonal"},
+    {name:"Colombia Huila",note:"250 г · карамель, персик",price:"380 ₴",badge:""},
+    {name:"Brazil Santos",note:"250 г · горіх, шоколад",price:"350 ₴",badge:""}
+  ]},
+  {id:"mrc",icon:"🎁",title:"Мерч PerkUP",desc:"Брендовані речі для справжніх",items:[
+    {name:"Термостакан PerkUP",note:"350 мл, матовий",price:"450 ₴",badge:"new"},
+    {name:"Шоппер",note:"натуральна бавовна",price:"280 ₴",badge:""},
+    {name:"Пін-значок",note:"набір 3 шт",price:"120 ₴",badge:""},
+    {name:"Листівка + зерна",note:"подарунковий набір",price:"380 ₴",badge:"hot"}
+  ]}
+]};
+
+let menuData=JSON.parse(localStorage.getItem('perkup_menu')||'null')||defaultData;
+
+// ===== RENDER MENU =====
+function renderMenu(){
+  const root=document.getElementById('menu-render');root.innerHTML='';
+  menuData.sections.forEach(sec=>{
+    let h=`<div class="section-title">${sec.icon} ${sec.title}</div>`;
+    if(sec.desc)h+=`<p class="section-desc">${sec.desc}</p>`;
+    sec.items.forEach(item=>{
+      let b='';
+      if(item.badge==='new')b='<span class="badge badge-new">NEW</span>';
+      if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span>';
+      if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span>';
+      h+=`<div class="menu-item"><div class="item-info"><div class="item-name">${item.name}${b}</div>${item.note?`<div class="item-note">${item.note}</div>`:''}</div><div class="item-price">${item.price}</div></div>`;
+    });
+    const w=document.createElement('div');w.innerHTML=h;root.appendChild(w);
+  });
+}
+
+// ===== RENDER PRINT =====
+function renderPrint(){
+  const cols=document.getElementById('print-cols')?.value||'two';
+  const qrUrl=document.getElementById('print-qr-url')?.value||'https://perkup.com.ua/menu';
+  const area=document.getElementById('print-area');if(!area)return;
+  let sH='';
+  menuData.sections.forEach(sec=>{
+    let items='';
+    sec.items.forEach(item=>{
+      let b='';
+      if(item.badge==='new')b='<span class="print-badge print-badge-new">NEW</span>';
+      if(item.badge==='hot')b='<span class="print-badge print-badge-hot">ХІТ</span>';
+      if(item.badge==='seasonal')b='<span class="print-badge print-badge-seasonal">Сезон</span>';
+      items+=`<div class="print-item"><span class="print-item-name">${item.name}${b}${item.note?` <span class="print-item-note">· ${item.note}</span>`:''}</span><span class="print-item-price">${item.price}</span></div>`;
+    });
+    sH+=`<div><div class="print-sec-title"><span>${sec.icon}</span>${sec.title}</div>${items}</div>`;
+  });
+  area.innerHTML=`
+    <div class="print-menu-header">
+      <div class="print-logo">Perk<span>UP</span></div>
+      <div class="print-tagline">Спеціальна кава · Авторські напої · Їжа</div>
+      <div class="print-location">📍 ${menuData.location} · Бровари</div>
+    </div>
+    <div class="print-cols ${cols}">${sH}</div>
+    <div class="print-footer">
+      <div><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div style="margin-top:4px;">Telegram: @PerkUPBot</div></div>
+      <div class="qr-zone"><div><div class="qr-label">Цифрове меню</div><div id="print-qr-mini"></div></div></div>
+    </div>`;
+  document.getElementById('print-qr-mini').innerHTML='';
+  try{new QRCode(document.getElementById('print-qr-mini'),{text:qrUrl,width:64,height:64,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}catch(e){}
+}
+
+// ===== QR =====
+function generateQR(){
+  const url=document.getElementById('qr-url-input').value||'https://perkup.com.ua/menu';
+  document.getElementById('qrcode').innerHTML='';
+  new QRCode(document.getElementById('qrcode'),{text:url,width:220,height:220,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  const p=document.getElementById('print-qr-url');if(p){p.value=url;renderPrint();}
+}
+function downloadQR(){
+  const c=document.querySelector('#qrcode canvas');
+  if(!c){alert('Спочатку згенеруйте QR');return;}
+  const a=document.createElement('a');a.download='perkup-qr.png';a.href=c.toDataURL('image/png');a.click();
+}
+function downloadQRBranded(){
+  const src=document.querySelector('#qrcode canvas');
+  if(!src){alert('Спочатку згенеруйте QR');return;}
+  const sz=300,c=document.createElement('canvas');c.width=sz;c.height=sz+60;
+  const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+  ctx.drawImage(src,40,20,sz-80,sz-80);
+  ctx.fillStyle='#1C1A17';ctx.font='bold 22px serif';ctx.textAlign='center';ctx.fillText('PerkUP',sz/2,sz-20);
+  ctx.fillStyle='#888';ctx.font='11px sans-serif';ctx.fillText('Крона Парк 2',sz/2,sz);
+  const a=document.createElement('a');a.download='perkup-qr-branded.png';a.href=c.toDataURL('image/png');a.click();
+}
+
+// ===== DOWNLOAD PRINT =====
+function downloadPrintHTML(){
+  const area=document.getElementById('print-area');if(!area)return;
+  const st=`<style>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Jost',sans-serif;background:white;color:#1C1A17;padding:20mm}.print-menu-header{text-align:center;padding-bottom:24px;margin-bottom:28px;border-bottom:2px solid #1C1A17}.print-logo{font-family:'Playfair Display',serif;font-size:48px;letter-spacing:-0.02em;line-height:1;color:#1C1A17}.print-logo span{color:#C4973A}.print-tagline{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8B7B6B;margin-top:6px}.print-location{font-size:12px;color:#8B7B6B;margin-top:4px}.print-cols{display:grid;gap:32px}.print-cols.two{grid-template-columns:1fr 1fr}.print-cols.one{grid-template-columns:1fr}.print-sec-title{font-family:'Playfair Display',serif;font-size:17px;color:#6B4F3A;padding-bottom:6px;border-bottom:1px solid #E8DDD0;margin-bottom:12px;display:flex;align-items:center;gap:8px}.print-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:13px;gap:8px}.print-item:last-child{border-bottom:none}.print-item-name{color:#1C1A17;font-weight:400;flex:1}.print-item-note{color:#8B7B6B;font-style:italic;font-size:11px}.print-item-price{color:#6B4F3A;font-weight:600;white-space:nowrap}.print-badge{font-size:9px;padding:1px 5px;border-radius:10px;margin-left:4px;font-weight:600}.print-badge-new{background:#E8F4E8;color:#3D5A3E}.print-badge-hot{background:#FAEEE0;color:#B85C2A}.print-badge-seasonal{background:#EEE8F4;color:#5A3A8B}.print-footer{margin-top:28px;padding-top:16px;border-top:1px solid #E8DDD0;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#8B7B6B}.qr-zone{display:flex;align-items:center;gap:12px}.qr-label{font-size:10px;color:#8B7B6B;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}@media print{body{padding:0}}</style>`;
+  const html=`<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>PerkUP Меню</title>${st}</head><body>${area.innerHTML}</body></html>`;
+  const a=document.createElement('a');a.download='perkup-menu-print.html';a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.click();
+}
+
+// ===== EDITOR =====
+function renderEditor(){
+  const root=document.getElementById('editor-root');root.innerHTML='';
+  menuData.sections.forEach((sec,si)=>{
+    const div=document.createElement('div');div.className='section-editor';
+    div.innerHTML=`
+      <div class="sec-hdr" onclick="togSec(${si})">
+        <span>${sec.icon} ${sec.title} (${sec.items.length} позицій)</span>
+        <span class="tog" id="tog-${si}">▾</span>
+      </div>
+      <div class="sec-body" id="secb-${si}">
+        <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:8px;margin-bottom:8px;">
+          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Назва</label><input type="text" value="${sec.title}" oninput="updSec(${si},'title',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
+          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Опис</label><input type="text" value="${sec.desc||''}" oninput="updSec(${si},'desc',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
+          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Іконка</label><input type="text" value="${sec.icon}" oninput="updSec(${si},'icon',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
+        </div>
+        <div class="row-labels"><span>Назва</span><span>Опис/розмір</span><span>Ціна</span><span>Бейдж</span><span></span></div>
+        <div id="items-${si}"></div>
+        <button class="btn-add" onclick="addItem(${si})">+ Додати позицію</button>
+        <div style="margin-top:12px;text-align:right;"><button onclick="delSec(${si})" style="font-size:12px;color:#c44;background:none;border:none;cursor:pointer;padding:4px 8px;">✕ Видалити секцію</button></div>
+      </div>`;
+    root.appendChild(div);renderItems(si);
+  });
+}
+
+function renderItems(si){
+  const c=document.getElementById(`items-${si}`);if(!c)return;c.innerHTML='';
+  menuData.sections[si].items.forEach((item,ii)=>{
+    const row=document.createElement('div');row.className='item-row';
+    row.innerHTML=`
+      <input type="text" value="${item.name}" placeholder="Назва" oninput="updItem(${si},${ii},'name',this.value)"/>
+      <input type="text" value="${item.note||''}" placeholder="Опис/розмір" oninput="updItem(${si},${ii},'note',this.value)"/>
+      <input type="text" value="${item.price}" placeholder="₴" oninput="updItem(${si},${ii},'price',this.value)"/>
+      <select onchange="updItem(${si},${ii},'badge',this.value)">
+        <option value="" ${!item.badge?'selected':''}>—</option>
+        <option value="new" ${item.badge==='new'?'selected':''}>NEW</option>
+        <option value="hot" ${item.badge==='hot'?'selected':''}>ХІТ</option>
+        <option value="seasonal" ${item.badge==='seasonal'?'selected':''}>Сезон</option>
+      </select>
+      <button class="btn-del" onclick="delItem(${si},${ii})">✕</button>`;
+    c.appendChild(row);
+  });
+}
+
+function togSec(si){const b=document.getElementById(`secb-${si}`),t=document.getElementById(`tog-${si}`);if(b.style.display==='none'){b.style.display='';t.textContent='▾';}else{b.style.display='none';t.textContent='▸';}}
+function updSec(si,f,v){menuData.sections[si][f]=v;markUnsaved();renderMenu();renderPrint();}
+function updItem(si,ii,f,v){menuData.sections[si].items[ii][f]=v;markUnsaved();renderMenu();renderPrint();}
+function delItem(si,ii){menuData.sections[si].items.splice(ii,1);renderItems(si);markUnsaved();renderMenu();renderPrint();}
+function addItem(si){menuData.sections[si].items.push({name:'Нова позиція',note:'',price:'0 ₴',badge:''});renderItems(si);markUnsaved();renderMenu();}
+function delSec(si){if(!confirm('Видалити секцію?'))return;menuData.sections.splice(si,1);renderEditor();markUnsaved();renderMenu();renderPrint();}
+function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:'Нова секція',desc:'',items:[{name:'Позиція 1',note:'',price:'0 ₴',badge:''}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
+function markUnsaved(){const s=document.getElementById('save-status');if(s)s.textContent='⚠ Є незбережені зміни';}
+function saveData(){localStorage.setItem('perkup_menu',JSON.stringify(menuData));const s=document.getElementById('save-status');if(s)s.textContent='✓ Збережено';setTimeout(()=>{if(s)s.textContent='Всі зміни збережено';},2000);}
+
+// ===== TABS =====
+function showTab(name,btn){
+  document.querySelectorAll('.atab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.atab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('atab-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(name==='print')renderPrint();
+  if(name==='edit')renderEditor();
+}
+
+// ===== INIT =====
+window.onload=function(){
+  renderMenu();
+  if(sessionStorage.getItem('pu_adm')==='1'){
+    isAdmin=true;
+    document.getElementById('admin-login-wrap').style.display='none';
+    document.getElementById('admin-content').classList.add('open');
+  }
+};
+</script>
+</body>
+</html>
