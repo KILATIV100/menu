@@ -2,552 +2,541 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>PerkUP — Крона Парк 2</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');
-  :root{--cream:#F9F5EF;--dark:#1C1A17;--brown:#6B4F3A;--gold:#C4973A;--accent:#E8DDD0;--muted:#8B7B6B;--green:#3D5A3E;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);}
-
-  /* ======= ПУБЛІЧНЕ МЕНЮ ======= */
-  #page-menu{max-width:680px;margin:0 auto;padding:0 16px 40px;}
-  .menu-header{text-align:center;padding:40px 0 24px;border-bottom:1px solid var(--accent);margin-bottom:32px;}
-  .logo-text{font-family:'Playfair Display',serif;font-size:44px;letter-spacing:-0.02em;color:var(--dark);line-height:1;}
-  .logo-text span{color:var(--gold);}
-  .subtitle{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-top:8px;}
-  .section-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--brown);margin:32px 0 4px;display:flex;align-items:center;gap:12px;}
-  .section-title::after{content:'';flex:1;height:1px;background:var(--accent);}
-  .section-desc{font-size:12px;color:var(--muted);letter-spacing:0.05em;margin-bottom:16px;font-style:italic;}
-  .menu-item{display:flex;align-items:baseline;justify-content:space-between;padding:11px 0;border-bottom:1px dashed rgba(107,79,58,0.15);}
-  .menu-item:last-child{border-bottom:none;}
-  .item-info{flex:1;}
-  .item-name{font-size:15px;font-weight:500;color:var(--dark);}
-  .item-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;}
-  .item-price{font-size:15px;font-weight:600;color:var(--brown);min-width:70px;text-align:right;white-space:nowrap;}
-  .badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:20px;margin-left:8px;vertical-align:middle;}
-  .badge-new{background:#E8F4E8;color:var(--green);}
-  .badge-hot{background:#FAEEE0;color:#B85C2A;}
-  .badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
-
-  /* Футер меню з прихованою кнопкою */
-  .menu-footer{max-width:680px;margin:0 auto;padding:24px 16px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--accent);}
-  .menu-footer-info{font-size:12px;color:var(--muted);}
-  .menu-footer-info strong{color:var(--dark);}
-  .admin-trigger{font-size:10px;color:rgba(139,123,107,0.3);background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.15em;text-transform:uppercase;padding:6px;transition:color 0.3s;}
-  .admin-trigger:hover{color:var(--muted);}
-
-  /* ======= АДМІН ПАНЕЛЬ (прихована за замовчуванням) ======= */
-  #page-admin{display:none;}
-  #page-admin.open{display:block;}
-
-  /* Логін */
-  #admin-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--dark);}
-  .login-box{background:var(--cream);border-radius:20px;padding:48px 40px;width:100%;max-width:360px;text-align:center;}
-  .login-logo{font-family:'Playfair Display',serif;font-size:36px;letter-spacing:-0.02em;color:var(--dark);line-height:1;margin-bottom:6px;}
-  .login-logo span{color:var(--gold);}
-  .login-sub{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:32px;}
-  .login-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:left;display:block;margin-bottom:8px;}
-  .login-input{width:100%;padding:13px 16px;border:1.5px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:16px;background:white;color:var(--dark);outline:none;transition:border-color 0.2s;letter-spacing:0.1em;margin-bottom:16px;text-align:center;}
-  .login-input:focus{border-color:var(--gold);}
-  .login-input.shake{animation:shake 0.35s ease;border-color:#C44;}
-  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-  .login-submit{width:100%;padding:13px;background:var(--dark);color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-bottom:8px;}
-  .login-submit:hover{background:var(--brown);}
-  .login-error{font-size:12px;color:#C44;min-height:18px;margin-top:6px;}
-  .login-hint{font-size:11px;color:var(--muted);margin-top:6px;}
-  .back-btn{width:100%;margin-top:14px;padding:11px;background:none;border:1px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
-  .back-btn:hover{border-color:var(--brown);color:var(--brown);}
-
-  /* Адмін контент */
-  #admin-content{display:none;}
-  #admin-content.open{display:block;}
-
-  .admin-topbar{background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
-  .admin-tabs{display:flex;}
-  .atab-btn{padding:14px 16px;background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
-  .atab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
-  .admin-logout{padding:8px 16px;background:none;border:1px solid rgba(255,255,255,0.2);border-radius:7px;font-family:'Jost',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
-  .admin-logout:hover{border-color:rgba(255,255,255,0.5);color:white;}
-
-  .atab-content{display:none;}
-  .atab-content.active{display:block;}
-
-  /* QR */
-  #atab-qr{max-width:480px;margin:0 auto;padding:40px 20px 60px;text-align:center;}
-  #atab-qr h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--dark);margin-bottom:8px;}
-  #atab-qr p.sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
-  .qr-url-row{display:flex;gap:8px;margin-bottom:24px;}
-  .qr-url-row input{flex:1;padding:10px 14px;border:1.5px solid var(--accent);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
-  .qr-url-row input:focus{border-color:var(--gold);}
-  .btn-gen{padding:10px 20px;background:var(--dark);color:white;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;}
-  .btn-gen:hover{background:var(--brown);}
-  .qr-box{background:white;border-radius:16px;padding:32px;margin:0 auto 24px;display:inline-block;box-shadow:0 2px 24px rgba(28,26,23,0.1);}
-  .qr-box #qrcode canvas,.qr-box #qrcode img{display:block;}
-  .qr-brand{margin-top:16px;font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);}
-  .qr-brand span{color:var(--gold);}
-  .qr-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
-  .qr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
-
-  /* Кнопки */
-  .btn-outline{padding:10px 22px;border:1.5px solid var(--dark);border-radius:8px;background:none;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;color:var(--dark);transition:all 0.2s;}
-  .btn-outline:hover{background:var(--dark);color:white;}
-  .btn-primary{padding:10px 22px;background:var(--gold);border:1.5px solid var(--gold);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;cursor:pointer;color:white;transition:all 0.2s;}
-  .btn-primary:hover{background:var(--brown);border-color:var(--brown);}
-
-  /* Print */
-  #atab-print{max-width:680px;margin:0 auto;padding:32px 20px 60px;}
-  .print-controls{background:white;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid var(--accent);}
-  .print-controls h3{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em;}
-  .ctrl-row{display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap;}
-  .ctrl-row label{font-size:13px;color:var(--muted);min-width:120px;}
-  .ctrl-row select,.ctrl-row input[type=text]{flex:1;min-width:160px;padding:7px 12px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
-  .ctrl-row select:focus,.ctrl-row input:focus{border-color:var(--gold);}
-  .print-preview{background:white;border-radius:12px;overflow:hidden;border:1px solid var(--accent);margin-bottom:20px;}
-  .print-preview-inner{padding:40px;}
-  .print-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
-
-  /* Edit */
-  #atab-edit{max-width:760px;margin:0 auto;padding:32px 20px 60px;}
-  #atab-edit h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:6px;}
-  .hint{font-size:13px;color:var(--muted);margin-bottom:24px;}
-  .section-editor{background:white;border-radius:12px;border:1px solid var(--accent);margin-bottom:20px;overflow:hidden;}
-  .sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--dark);color:white;cursor:pointer;}
-  .sec-hdr span{font-size:14px;font-weight:500;letter-spacing:0.05em;}
-  .sec-hdr .tog{font-size:18px;color:var(--gold);}
-  .sec-body{padding:16px 18px;}
-  .item-row{display:grid;grid-template-columns:1fr 1fr 80px 80px 28px;gap:8px;align-items:center;margin-bottom:8px;}
-  .item-row input,.item-row select{padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;width:100%;}
-  .item-row input:focus,.item-row select:focus{border-color:var(--gold);}
-  .btn-del{background:none;border:none;color:#C44;font-size:18px;cursor:pointer;padding:4px;border-radius:4px;}
-  .btn-del:hover{background:#fef0f0;}
-  .btn-add{margin-top:8px;padding:7px 16px;background:var(--cream);border:1px dashed var(--brown);border-radius:6px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;color:var(--brown);cursor:pointer;}
-  .btn-add:hover{background:var(--accent);}
-  .row-labels{display:grid;grid-template-columns:1fr 1fr 80px 80px 28px;gap:8px;margin-bottom:6px;}
-  .row-labels span{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);}
-
-  /* Збереження */
-  .save-bar{background:var(--dark);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0;}
-  .save-bar span{font-size:13px;color:rgba(255,255,255,0.55);}
-  .save-btn{padding:9px 28px;background:var(--gold);border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;color:white;cursor:pointer;}
-  .save-btn:hover{background:#b8883a;}
-
-  /* Print стилі */
-  .print-menu-header{text-align:center;padding-bottom:24px;margin-bottom:28px;border-bottom:2px solid var(--dark);}
-  .print-logo{font-family:'Playfair Display',serif;font-size:48px;letter-spacing:-0.02em;line-height:1;color:var(--dark);}
-  .print-logo span{color:var(--gold);}
-  .print-tagline{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
-  .print-location{font-size:12px;color:var(--muted);margin-top:4px;}
-  .print-cols{display:grid;gap:32px;}
-  .print-cols.two{grid-template-columns:1fr 1fr;}
-  .print-cols.one{grid-template-columns:1fr;}
-  .print-sec-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown);padding-bottom:6px;border-bottom:1px solid var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-  .print-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:13px;gap:8px;}
-  .print-item:last-child{border-bottom:none;}
-  .print-item-name{color:var(--dark);font-weight:400;flex:1;}
-  .print-item-note{color:var(--muted);font-style:italic;font-size:11px;}
-  .print-item-price{color:var(--brown);font-weight:600;white-space:nowrap;}
-  .print-badge{font-size:9px;padding:1px 5px;border-radius:10px;margin-left:4px;font-weight:600;}
-  .print-badge-new{background:#E8F4E8;color:var(--green);}
-  .print-badge-hot{background:#FAEEE0;color:#B85C2A;}
-  .print-badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
-  .print-footer{margin-top:28px;padding-top:16px;border-top:1px solid var(--accent);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);}
-  .qr-zone{display:flex;align-items:center;gap:12px;}
-  .qr-label{font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
-
-  @media print{
-    #page-menu,#page-admin .admin-topbar,#admin-content .save-bar,#atab-qr,#atab-edit,.print-controls,.print-actions{display:none!important;}
-    #page-admin{display:block!important;}
-    #admin-content{display:block!important;}
-    #atab-print{display:block!important;padding:0;}
-    .print-preview{border:none;border-radius:0;}
-    .print-preview-inner{padding:20mm;}
-    body{background:white;}
-  }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');
+:root{--cream:#F9F5EF;--dark:#1C1A17;--brown:#6B4F3A;--gold:#C4973A;--accent:#E8DDD0;--muted:#8B7B6B;--green:#3D5A3E;--radius:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+.pub-header{position:sticky;top:0;z-index:50;background:rgba(249,245,239,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--accent);padding:0 16px;}
+.pub-header-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px;}
+.pub-logo{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:-0.02em;color:var(--dark);line-height:1;}
+.pub-logo span{color:var(--gold);}
+.pub-logo small{display:block;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);font-weight:400;}
+.lang-toggle{display:flex;background:var(--accent);border-radius:20px;overflow:hidden;flex-shrink:0;}
+.lang-btn{padding:5px 12px;font-size:11px;font-weight:600;letter-spacing:0.06em;border:none;background:none;cursor:pointer;font-family:'Jost',sans-serif;color:var(--muted);transition:all 0.2s;}
+.lang-btn.active{background:var(--dark);color:white;border-radius:20px;}
+.pub-controls{max-width:720px;margin:0 auto;padding:12px 16px 0;}
+.search-wrap{position:relative;margin-bottom:10px;}
+.search-wrap input{width:100%;padding:10px 40px 10px 40px;border:1.5px solid var(--accent);border-radius:24px;font-family:'Jost',sans-serif;font-size:14px;background:white;color:var(--dark);outline:none;transition:border-color 0.2s;}
+.search-wrap input:focus{border-color:var(--gold);}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none;}
+.search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;cursor:pointer;color:var(--muted);display:none;}
+.cat-filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
+.cat-filters::-webkit-scrollbar{display:none;}
+.cat-btn{flex-shrink:0;padding:6px 14px;border:1.5px solid var(--accent);border-radius:20px;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;background:white;color:var(--muted);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.cat-btn.active{background:var(--dark);border-color:var(--dark);color:white;}
+.menu-body{max-width:720px;margin:0 auto;padding:8px 16px 100px;}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);margin:24px 0 4px;display:flex;align-items:center;gap:10px;opacity:0;transform:translateY(16px);transition:all 0.4s ease;}
+.section-title.visible{opacity:1;transform:translateY(0);}
+.section-title::after{content:'';flex:1;height:1px;background:var(--accent);}
+.section-desc{font-size:12px;color:var(--muted);letter-spacing:0.04em;margin-bottom:12px;font-style:italic;}
+.menu-card{background:white;border-radius:var(--radius);margin-bottom:8px;overflow:hidden;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease,transform 0.35s ease;cursor:pointer;}
+.menu-card.visible{opacity:1;transform:translateY(0);}
+.menu-card:active{transform:scale(0.985);}
+.menu-card-inner{display:flex;align-items:stretch;}
+.menu-card-img{width:88px;min-height:88px;flex-shrink:0;background:var(--accent);overflow:hidden;}
+.menu-card-img img{width:100%;height:100%;object-fit:cover;}
+.menu-card-img.no-photo{display:flex;align-items:center;justify-content:center;font-size:28px;}
+.menu-card-body{flex:1;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;}
+.menu-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.menu-card-name{font-size:14px;font-weight:500;color:var(--dark);line-height:1.3;}
+.menu-card-price{font-size:15px;font-weight:600;color:var(--brown);white-space:nowrap;flex-shrink:0;}
+.menu-card-note{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic;}
+.menu-card-bottom{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap;}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:2px 7px;border-radius:20px;}
+.badge-new{background:#E8F4E8;color:var(--green);}
+.badge-hot{background:#FAEEE0;color:#B85C2A;}
+.badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
+.allergen-tag{font-size:10px;padding:2px 6px;border-radius:10px;background:var(--accent);color:var(--muted);}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(28,26,23,0.6);align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--cream);border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;animation:slideUp 0.28s ease;position:relative;}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:16px;}
+.modal-img-placeholder{width:100%;height:140px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:16px;}
+.modal-name{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:4px;}
+.modal-price{font-size:20px;font-weight:600;color:var(--brown);margin-bottom:8px;}
+.modal-note{font-size:14px;color:var(--muted);margin-bottom:12px;font-style:italic;}
+.modal-allergens h4{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.modal-allergens-list{display:flex;flex-wrap:wrap;gap:6px;}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--accent);border:none;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);}
+.no-results{text-align:center;padding:60px 20px;color:var(--muted);}
+.pub-footer{max-width:720px;margin:0 auto;padding:20px 16px 28px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--accent);}
+.pub-footer-info{font-size:12px;color:var(--muted);line-height:1.8;}
+.pub-footer-info strong{color:var(--dark);}
+.admin-trigger{font-size:10px;color:rgba(139,123,107,0.25);background:none;border:none;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:0.15em;text-transform:uppercase;padding:6px;transition:color 0.3s;}
+.admin-trigger:hover{color:var(--muted);}
+#page-admin{display:none;}
+#page-admin.open{display:block;}
+#admin-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--dark);}
+.login-box{background:var(--cream);border-radius:20px;padding:48px 40px;width:100%;max-width:360px;text-align:center;}
+.login-logo{font-family:'Playfair Display',serif;font-size:36px;letter-spacing:-0.02em;color:var(--dark);line-height:1;margin-bottom:6px;}
+.login-logo span{color:var(--gold);}
+.login-sub{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:32px;}
+.login-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-align:left;display:block;margin-bottom:8px;}
+.login-input{width:100%;padding:13px 16px;border:1.5px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:16px;background:white;color:var(--dark);outline:none;transition:border-color 0.2s;letter-spacing:0.1em;margin-bottom:16px;text-align:center;}
+.login-input:focus{border-color:var(--gold);}
+.login-input.shake{animation:shake 0.35s ease;border-color:#C44;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.login-submit{width:100%;padding:13px;background:var(--dark);color:white;border:none;border-radius:10px;font-family:'Jost',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-bottom:8px;}
+.login-submit:hover{background:var(--brown);}
+.login-error{font-size:12px;color:#C44;min-height:18px;margin-top:6px;}
+.login-hint{font-size:11px;color:var(--muted);margin-top:6px;}
+.back-btn{width:100%;margin-top:14px;padding:11px;background:none;border:1px solid var(--accent);border-radius:10px;font-family:'Jost',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.back-btn:hover{border-color:var(--brown);color:var(--brown);}
+#admin-content{display:none;}
+#admin-content.open{display:block;}
+.admin-topbar{background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:100;}
+.admin-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.admin-tabs::-webkit-scrollbar{display:none;}
+.atab-btn{padding:13px 12px;background:none;border:none;color:rgba(255,255,255,0.5);font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.atab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.admin-logout{padding:7px 12px;background:none;border:1px solid rgba(255,255,255,0.2);border-radius:7px;font-family:'Jost',sans-serif;font-size:11px;color:rgba(255,255,255,0.5);cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.admin-logout:hover{border-color:rgba(255,255,255,0.5);color:white;}
+.atab-content{display:none;}
+.atab-content.active{display:block;}
+#atab-stats{max-width:720px;margin:0 auto;padding:24px 16px 80px;}
+#atab-stats h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:4px;}
+.hint{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:16px 0;}
+.stat-card{background:white;border-radius:var(--radius);padding:16px;border:1px solid var(--accent);text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--gold);font-weight:700;}
+.stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;}
+.stats-chart{background:white;border-radius:var(--radius);padding:18px;border:1px solid var(--accent);margin-bottom:16px;}
+.stats-chart h3{font-size:12px;font-weight:600;color:var(--dark);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
+.chart-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.chart-bar-label{font-size:11px;color:var(--muted);min-width:70px;text-align:right;}
+.chart-bar-wrap{flex:1;background:var(--accent);border-radius:4px;overflow:hidden;height:18px;}
+.chart-bar{height:18px;background:var(--gold);border-radius:4px;transition:width 0.8s ease;}
+.chart-bar-val{font-size:11px;color:var(--dark);font-weight:500;min-width:24px;}
+.reset-stats-btn{font-size:12px;color:var(--muted);background:none;border:1px solid var(--accent);padding:6px 14px;border-radius:6px;cursor:pointer;font-family:'Jost',sans-serif;}
+#atab-qr{max-width:480px;margin:0 auto;padding:28px 16px 80px;text-align:center;}
+#atab-qr h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:6px;}
+.qr-url-row{display:flex;gap:8px;margin-bottom:20px;}
+.qr-url-row input{flex:1;padding:10px 14px;border:1.5px solid var(--accent);border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
+.qr-url-row input:focus{border-color:var(--gold);}
+.btn-gen{padding:10px 18px;background:var(--dark);color:white;border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;}
+.btn-gen:hover{background:var(--brown);}
+.qr-box{background:white;border-radius:16px;padding:28px;margin:0 auto 18px;display:inline-block;box-shadow:0 2px 16px rgba(28,26,23,0.1);}
+.qr-box #qrcode{display:flex;align-items:center;justify-content:center;}
+.qr-brand{margin-top:12px;font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);}
+.qr-brand span{color:var(--gold);}
+.qr-sub{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+.qr-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+#atab-print{max-width:720px;margin:0 auto;padding:24px 16px 80px;}
+.print-controls{background:white;border-radius:var(--radius);padding:18px;margin-bottom:16px;border:1px solid var(--accent);}
+.print-controls h3{font-size:12px;font-weight:600;color:var(--dark);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.08em;}
+.ctrl-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap;}
+.ctrl-row label{font-size:12px;color:var(--muted);min-width:100px;}
+.ctrl-row select,.ctrl-row input[type=text]{flex:1;min-width:140px;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;}
+.ctrl-row select:focus,.ctrl-row input:focus{border-color:var(--gold);}
+.print-preview{background:white;border-radius:var(--radius);overflow:hidden;border:1px solid var(--accent);margin-bottom:14px;}
+.print-preview-inner{padding:32px;}
+.print-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
+#atab-edit{max-width:820px;margin:0 auto;padding:24px 16px 80px;}
+#atab-edit h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);margin-bottom:4px;}
+.section-editor{background:white;border-radius:var(--radius);border:1px solid var(--accent);margin-bottom:14px;overflow:hidden;}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--dark);color:white;cursor:pointer;gap:8px;}
+.sec-hdr-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+.sec-hdr span{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sec-drag-handle{cursor:grab;color:rgba(255,255,255,0.35);font-size:16px;flex-shrink:0;line-height:1;}
+.tog{font-size:15px;color:var(--gold);flex-shrink:0;}
+.sec-body{padding:14px 16px;}
+.sec-meta-row{display:grid;grid-template-columns:1fr 1fr 60px;gap:8px;margin-bottom:10px;}
+.sec-meta-row.two{grid-template-columns:1fr 1fr;}
+.field-group label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:3px;}
+.field-group input,.field-group select{width:100%;padding:6px 8px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:12px;background:white;color:var(--dark);outline:none;}
+.field-group input:focus,.field-group select:focus{border-color:var(--gold);}
+.items-hdr{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 1fr 46px 46px;gap:5px;margin-bottom:5px;padding:0 2px;}
+.items-hdr span{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);}
+.item-edit-row{display:grid;grid-template-columns:20px 1fr 1fr 64px 68px 1fr 46px 46px;gap:5px;align-items:start;margin-bottom:4px;padding:7px 6px;border-radius:8px;background:var(--cream);}
+.item-edit-row input,.item-edit-row select{padding:5px 7px;border:1px solid var(--accent);border-radius:5px;font-family:'Jost',sans-serif;font-size:11px;background:white;color:var(--dark);outline:none;width:100%;}
+.item-edit-row input:focus,.item-edit-row select:focus{border-color:var(--gold);}
+.drag-handle{color:var(--muted);font-size:13px;cursor:grab;text-align:center;padding-top:4px;}
+.btn-del{background:none;border:none;color:#C44;font-size:15px;cursor:pointer;padding:3px;border-radius:4px;width:100%;text-align:center;}
+.btn-del:hover{background:#fef0f0;}
+.toggle-vis{border:1px solid var(--accent);border-radius:5px;font-size:10px;cursor:pointer;padding:3px 4px;font-family:'Jost',sans-serif;color:var(--muted);width:100%;text-align:center;background:white;}
+.toggle-vis.h{background:#fef0f0;color:#C44;border-color:#f5c0c0;}
+.toggle-vis.v{background:#f0fef4;color:#2d7a3a;border-color:#b0dcb8;}
+.allergen-row{grid-column:2/-1;background:#f5f0ea;border-radius:6px;padding:6px 8px;margin-bottom:4px;}
+.allergen-row label-head{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:4px;}
+.allergen-checks{display:flex;flex-wrap:wrap;gap:5px;}
+.a-check{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--dark);cursor:pointer;}
+.photo-wrap{display:flex;flex-direction:column;gap:3px;}
+.photo-preview-thumb{width:100%;height:28px;object-fit:cover;border-radius:4px;border:1px solid var(--accent);display:none;}
+.btn-add{margin-top:8px;padding:6px 12px;background:var(--cream);border:1px dashed var(--brown);border-radius:6px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;color:var(--brown);cursor:pointer;}
+.btn-add:hover{background:var(--accent);}
+.btn-outline{padding:8px 18px;border:1.5px solid var(--dark);border-radius:8px;background:none;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;cursor:pointer;color:var(--dark);transition:all 0.2s;}
+.btn-outline:hover{background:var(--dark);color:white;}
+.btn-primary{padding:8px 18px;background:var(--gold);border:1.5px solid var(--gold);border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;cursor:pointer;color:white;transition:all 0.2s;}
+.btn-primary:hover{background:var(--brown);border-color:var(--brown);}
+.save-bar{background:var(--dark);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0;z-index:50;}
+.save-bar span{font-size:12px;color:rgba(255,255,255,0.5);}
+.save-btn{padding:8px 22px;background:var(--gold);border:none;border-radius:8px;font-family:'Jost',sans-serif;font-size:12px;font-weight:600;color:white;cursor:pointer;}
+.save-btn:hover{background:#b8883a;}
+.print-menu-header{text-align:center;padding-bottom:18px;margin-bottom:22px;border-bottom:2px solid var(--dark);}
+.print-logo{font-family:'Playfair Display',serif;font-size:42px;letter-spacing:-0.02em;line-height:1;color:var(--dark);}
+.print-logo span{color:var(--gold);}
+.print-tagline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.print-cols{display:grid;gap:24px;}
+.print-cols.two{grid-template-columns:1fr 1fr;}
+.print-cols.one{grid-template-columns:1fr;}
+.print-sec-title{font-family:'Playfair Display',serif;font-size:15px;color:var(--brown);padding-bottom:4px;border-bottom:1px solid var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.print-item{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:12px;gap:6px;}
+.print-item:last-child{border-bottom:none;}
+.print-item-name{color:var(--dark);font-weight:400;flex:1;}
+.print-item-note{color:var(--muted);font-style:italic;font-size:10px;}
+.print-item-price{color:var(--brown);font-weight:600;white-space:nowrap;}
+.print-badge{font-size:8px;padding:1px 4px;border-radius:8px;margin-left:3px;font-weight:600;}
+.print-badge-new{background:#E8F4E8;color:var(--green);}
+.print-badge-hot{background:#FAEEE0;color:#B85C2A;}
+.print-badge-seasonal{background:#EEE8F4;color:#5A3A8B;}
+.print-footer{margin-top:20px;padding-top:12px;border-top:1px solid var(--accent);display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted);}
+.print-qr-zone{display:flex;align-items:center;gap:8px;}
+.print-qr-label{font-size:8px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;}
+@media print{#page-menu,#admin-content .admin-topbar,#admin-content .save-bar,#atab-qr,#atab-edit,#atab-stats,.print-controls,.print-actions{display:none!important;}#page-admin{display:block!important;}#admin-content{display:block!important;}#atab-print{display:block!important;padding:0;}.print-preview{border:none;border-radius:0;}.print-preview-inner{padding:16mm;}body{background:white;}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px;}
 </style>
 </head>
 <body>
-
-<!-- =========== ПУБЛІЧНЕ МЕНЮ =========== -->
 <div id="page-menu">
-  <div class="menu-header">
-    <div class="logo-text">Perk<span>UP</span></div>
-    <div class="subtitle">Крона Парк 2 · Бровари</div>
-  </div>
-  <div id="menu-render"></div>
-
-  <div class="menu-footer">
-    <div class="menu-footer-info">
-      <div>Wi-Fi: <strong>PerkUP_Free</strong></div>
-      <div style="margin-top:4px;">Telegram: <strong>@PerkUPBot</strong></div>
+  <header class="pub-header">
+    <div class="pub-header-inner">
+      <div class="pub-logo">Perk<span>UP</span><small id="loc-label">Крона Парк 2 · Бровари</small></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('uk',this)">UA</button>
+        <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      </div>
     </div>
+  </header>
+  <div class="pub-controls">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Пошук по меню..." oninput="onSearch(this.value)"/>
+      <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="cat-filters" id="cat-filters"></div>
+  </div>
+  <div class="menu-body" id="menu-body"></div>
+  <div class="pub-footer">
+    <div class="pub-footer-info"><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div>Telegram: <strong>@PerkUPBot</strong></div></div>
     <button class="admin-trigger" onclick="openAdmin()">· · ·</button>
   </div>
 </div>
-
-<!-- =========== АДМІН ПАНЕЛЬ =========== -->
+<div class="modal-overlay" id="item-modal"><div class="modal-box" id="modal-content"></div></div>
 <div id="page-admin">
-
-  <!-- Екран логіну -->
   <div id="admin-login-wrap">
     <div class="login-box">
       <div class="login-logo">Perk<span>UP</span></div>
       <div class="login-sub">Адмін · Крона Парк 2</div>
       <label class="login-label">Пароль</label>
-      <input type="password" id="login-input" class="login-input" placeholder="••••••••"
-        onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password"/>
+      <input type="password" id="login-input" class="login-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" autocomplete="current-password"/>
       <button class="login-submit" onclick="doLogin()">Увійти</button>
       <div class="login-error" id="login-error"></div>
       <div class="login-hint" id="login-hint"></div>
       <button class="back-btn" onclick="closeAdmin()">← Повернутись до меню</button>
     </div>
   </div>
-
-  <!-- Контент після логіну -->
   <div id="admin-content">
     <div class="admin-topbar">
       <div class="admin-tabs">
-        <button class="atab-btn active" onclick="showTab('qr',this)">QR-код</button>
-        <button class="atab-btn" onclick="showTab('print',this)">🖨 Друк</button>
-        <button class="atab-btn" onclick="showTab('edit',this)">✏️ Редагування</button>
+        <button class="atab-btn active" onclick="showATab('stats',this)">📊 Статистика</button>
+        <button class="atab-btn" onclick="showATab('qr',this)">QR-код</button>
+        <button class="atab-btn" onclick="showATab('print',this)">🖨 Друк</button>
+        <button class="atab-btn" onclick="showATab('edit',this)">✏️ Меню</button>
       </div>
       <button class="admin-logout" onclick="doLogout()">Вийти</button>
     </div>
-
-    <!-- QR -->
-    <div id="atab-qr" class="atab-content active">
+    <div id="atab-stats" class="atab-content active">
+      <h2>Статистика</h2>
+      <p class="hint">Перегляди з QR-коду (локальне збереження)</p>
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="stats-chart"><h3>Перегляди по днях (7 днів)</h3><div id="stats-days"></div></div>
+      <div class="stats-chart"><h3>Топ категорій</h3><div id="stats-cats"></div></div>
+      <div style="text-align:right;margin-top:8px;"><button class="reset-stats-btn" onclick="resetStats()">Скинути статистику</button></div>
+    </div>
+    <div id="atab-qr" class="atab-content">
       <h2>QR-код меню</h2>
-      <p class="sub">Вставте посилання — QR оновиться автоматично</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Вставте посилання — QR оновиться автоматично</p>
       <div class="qr-url-row">
-        <input type="text" id="qr-url-input" placeholder="https://perkup.com.ua/menu" value="https://perkup.com.ua/menu"/>
+        <input type="text" id="qr-url-input" placeholder="https://menukrona.perkup.com.ua" value="https://menukrona.perkup.com.ua"/>
         <button class="btn-gen" onclick="generateQR()">Генерувати</button>
       </div>
-      <div class="qr-box">
-        <div id="qrcode"></div>
-        <div class="qr-brand">Perk<span>UP</span></div>
-        <div class="qr-sub">Крона Парк 2</div>
-      </div>
+      <div class="qr-box"><div id="qrcode"></div><div class="qr-brand">Perk<span>UP</span></div><div class="qr-sub">Крона Парк 2</div></div>
       <div class="qr-actions">
-        <button class="btn-outline" onclick="downloadQR()">↓ Завантажити PNG</button>
+        <button class="btn-outline" onclick="downloadQR()">↓ PNG</button>
         <button class="btn-primary" onclick="downloadQRBranded()">↓ З брендингом</button>
       </div>
-      <p style="margin-top:20px;font-size:12px;color:var(--muted);text-align:center;">Змініть URL → Генерувати → завантажте</p>
     </div>
-
-    <!-- PRINT -->
     <div id="atab-print" class="atab-content">
       <div class="print-controls">
         <h3>Параметри друку</h3>
-        <div class="ctrl-row">
-          <label>Колонки</label>
-          <select id="print-cols" onchange="renderPrint()">
-            <option value="two">2 колонки (A4 альбом)</option>
-            <option value="one">1 колонка (A4 портрет)</option>
-          </select>
-        </div>
-        <div class="ctrl-row">
-          <label>QR-посилання</label>
-          <input type="text" id="print-qr-url" placeholder="https://perkup.com.ua/menu" value="https://perkup.com.ua/menu" oninput="renderPrint()"/>
-        </div>
+        <div class="ctrl-row"><label>Колонки</label><select id="print-cols" onchange="renderPrint()"><option value="two">2 колонки (A4 альбом)</option><option value="one">1 колонка (A4 портрет)</option></select></div>
+        <div class="ctrl-row"><label>QR-посилання</label><input type="text" id="print-qr-url" value="https://menukrona.perkup.com.ua" oninput="renderPrint()"/></div>
       </div>
-      <div class="print-preview">
-        <div class="print-preview-inner" id="print-area"></div>
-      </div>
+      <div class="print-preview"><div class="print-preview-inner" id="print-area"></div></div>
       <div class="print-actions">
         <button class="btn-outline" onclick="window.print()">🖨 Друкувати</button>
         <button class="btn-primary" onclick="downloadPrintHTML()">↓ Завантажити HTML</button>
       </div>
     </div>
-
-    <!-- EDIT -->
     <div id="atab-edit" class="atab-content">
       <h2>Редагування меню</h2>
-      <p class="hint">Зміни одразу відображаються в меню і версії для друку</p>
+      <p class="hint">Перетягуй ⠿ для зміни порядку. Зміни миттєво оновлюються в меню.</p>
       <div id="editor-root"></div>
-      <div style="text-align:center;margin-top:24px;">
-        <button class="btn-outline" onclick="addSection()" style="padding:10px 28px;">+ Додати секцію</button>
-      </div>
+      <div style="text-align:center;margin-top:18px;"><button class="btn-outline" onclick="addSection()" style="padding:8px 22px;">+ Додати секцію</button></div>
     </div>
-
-    <div class="save-bar">
-      <span id="save-status">Всі зміни збережено</span>
-      <button class="save-btn" onclick="saveData()">💾 Зберегти</button>
-    </div>
+    <div class="save-bar"><span id="save-status">Всі зміни збережено</span><button class="save-btn" onclick="saveData()">💾 Зберегти</button></div>
   </div>
 </div>
-
 <script>
-// ===== AUTH =====
-function hashStr(s){let h=0x12345678;for(let i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;h^=(h>>>16);}return(h>>>0).toString(36);}
-const ADMIN_HASH=hashStr('57ba1z72');
-let isAdmin=false,failCount=0,lockUntil=0;
-const MAX_FAIL=5;
-
-function openAdmin(){
-  document.getElementById('page-menu').style.display='none';
-  document.getElementById('page-admin').classList.add('open');
-  if(!isAdmin){
-    document.getElementById('admin-login-wrap').style.display='flex';
-    document.getElementById('admin-content').classList.remove('open');
-    setTimeout(()=>document.getElementById('login-input').focus(),80);
-  }
-}
-
-function closeAdmin(){
-  document.getElementById('page-admin').classList.remove('open');
-  document.getElementById('page-menu').style.display='block';
-}
-
-function doLogin(){
-  const now=Date.now();
-  if(now<lockUntil){showErr('Заблоковано. Зачекайте '+Math.ceil((lockUntil-now)/1000)+' сек.');return;}
-  const val=document.getElementById('login-input').value;
-  if(hashStr(val)===ADMIN_HASH){
-    isAdmin=true;failCount=0;
-    sessionStorage.setItem('pu_adm','1');
-    document.getElementById('admin-login-wrap').style.display='none';
-    document.getElementById('admin-content').classList.add('open');
-    generateQR();renderPrint();
-  } else {
-    failCount++;
-    document.getElementById('login-input').value='';
-    const inp=document.getElementById('login-input');
-    inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');
-    setTimeout(()=>inp.classList.remove('shake'),400);
-    if(failCount>=MAX_FAIL){
-      lockUntil=Date.now()+30000;failCount=0;
-      const t=setInterval(()=>{
-        const s=Math.ceil((lockUntil-Date.now())/1000);
-        if(s<=0){clearInterval(t);showErr('');document.getElementById('login-hint').textContent='';}
-        else showErr('Заблоковано. Зачекайте '+s+' сек.');
-      },1000);
-    } else {
-      showErr('Невірний пароль');
-      document.getElementById('login-hint').textContent='Залишилось спроб: '+(MAX_FAIL-failCount);
-    }
-  }
-}
-
+var ALLERGENS_UA=['Глютен','Молоко','Яйця','Горіхи','Соя','Кунжут','Сульфіти'];
+var ALLERGENS_EN=['Gluten','Milk','Eggs','Nuts','Soy','Sesame','Sulphites'];
+var lang='uk';
+function aLabel(i){return lang==='uk'?ALLERGENS_UA[i]:ALLERGENS_EN[i];}
+function hashStr(s){var h=0x12345678;for(var i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;h^=(h>>>16);}return(h>>>0).toString(36);}
+var ADMIN_HASH=hashStr('57ba1z72');
+var isAdmin=false,failCount=0,lockUntil=0;
+function openAdmin(){document.getElementById('page-menu').style.display='none';document.getElementById('page-admin').classList.add('open');if(!isAdmin){document.getElementById('admin-login-wrap').style.display='flex';document.getElementById('admin-content').classList.remove('open');setTimeout(function(){document.getElementById('login-input').focus();},80);}}
+function closeAdmin(){document.getElementById('page-admin').classList.remove('open');document.getElementById('page-menu').style.display='block';}
+function doLogin(){var now=Date.now();if(now<lockUntil){showErr('Заблоковано '+Math.ceil((lockUntil-now)/1000)+' сек.');return;}var val=document.getElementById('login-input').value;if(hashStr(val)===ADMIN_HASH){isAdmin=true;failCount=0;sessionStorage.setItem('pu_adm','1');document.getElementById('admin-login-wrap').style.display='none';document.getElementById('admin-content').classList.add('open');generateQR();renderPrint();renderStats();}else{failCount++;document.getElementById('login-input').value='';var inp=document.getElementById('login-input');inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');setTimeout(function(){inp.classList.remove('shake');},400);if(failCount>=5){lockUntil=Date.now()+30000;failCount=0;var t=setInterval(function(){var s=Math.ceil((lockUntil-Date.now())/1000);if(s<=0){clearInterval(t);showErr('');document.getElementById('login-hint').textContent='';}else showErr('Заблоковано '+s+' сек.');},1000);}else{showErr('Невірний пароль');document.getElementById('login-hint').textContent='Залишилось спроб: '+(5-failCount);}}}
 function showErr(m){document.getElementById('login-error').textContent=m;}
-
-function doLogout(){
-  isAdmin=false;sessionStorage.removeItem('pu_adm');
-  document.getElementById('admin-login-wrap').style.display='flex';
-  document.getElementById('admin-content').classList.remove('open');
-  document.getElementById('login-input').value='';
-  showErr('');document.getElementById('login-hint').textContent='';
-  closeAdmin();
-}
-
-// ===== MENU DATA =====
-const defaultData={location:"Крона Парк 2",sections:[
-  {id:"esp",icon:"☕",title:"Еспресо-напої",desc:"Зернова суміш PerkUP Blend",items:[
-    {name:"Еспресо",note:"30 мл",price:"35 ₴",badge:""},
-    {name:"Доппіо",note:"60 мл",price:"45 ₴",badge:""},
-    {name:"Американо",note:"150 мл",price:"50 ₴",badge:""},
-    {name:"Капучино",note:"160 мл",price:"65 ₴",badge:""},
-    {name:"Флет Вайт",note:"150 мл",price:"70 ₴",badge:""},
-    {name:"Лате",note:"300 мл",price:"75 ₴",badge:""},
-    {name:"Кортадо",note:"90 мл",price:"60 ₴",badge:"hot"},
-    {name:"Рафе",note:"220 мл, вершки 35%",price:"90 ₴",badge:""}
-  ]},
-  {id:"aut",icon:"✨",title:"Авторські напої",desc:"Сезонне меню · оновлюється щомісяця",items:[
-    {name:"Карамельний лате",note:"домашня карамель, солона пінка",price:"95 ₴",badge:"hot"},
-    {name:"Пістачіо лате",note:"фісташкова паста, молоко",price:"100 ₴",badge:"seasonal"},
-    {name:"Кокос & Ваніль",note:"кокосове молоко, ваніль",price:"95 ₴",badge:"new"},
-    {name:"Матча лате",note:"церемоніальна матча",price:"90 ₴",badge:""},
-    {name:"Chai Spice",note:"масала, вівсяне молоко",price:"85 ₴",badge:"seasonal"}
-  ]},
-  {id:"tea",icon:"🫖",title:"Чай та трав'яні напої",desc:"Листовий чай, заварювання 400 мл",items:[
-    {name:"Чорний Assam",note:"класичний",price:"55 ₴",badge:""},
-    {name:"Зелений Сенча",note:"японський",price:"60 ₴",badge:""},
-    {name:"Лаванда & М'ята",note:"авторський збір",price:"65 ₴",badge:"new"},
-    {name:"Ройбос з імбиром",note:"без кофеїну",price:"65 ₴",badge:""},
-    {name:"Чабрець & Мед",note:"місцевий збір",price:"70 ₴",badge:"seasonal"}
-  ]},
-  {id:"cld",icon:"🧊",title:"Холодні напої",desc:"Cold brew, лимонади, смузі",items:[
-    {name:"Cold Brew",note:"24 год. настоювання",price:"85 ₴",badge:"hot"},
-    {name:"Нітро Cold Brew",note:"з азотом",price:"95 ₴",badge:"new"},
-    {name:"Лимонад PerkUP",note:"лимон, базилік, м'ята",price:"80 ₴",badge:""},
-    {name:"Полуниця & Маракуя",note:"сезонний лимонад",price:"85 ₴",badge:"seasonal"}
-  ]},
-  {id:"food",icon:"🥐",title:"Їжа",desc:"Щоденна випічка та снеки",items:[
-    {name:"Круасан вершковий",note:"свіжий щодня",price:"55 ₴",badge:""},
-    {name:"Круасан мигдальний",note:"заварний крем, мигдаль",price:"75 ₴",badge:"hot"},
-    {name:"Банановий хліб",note:"домашній рецепт",price:"65 ₴",badge:""},
-    {name:"Чізкейк NY",note:"порція",price:"95 ₴",badge:""},
-    {name:"Сирний сендвіч",note:"тост, гауда, помідор",price:"90 ₴",badge:""},
-    {name:"Вівсянка з ягодами",note:"рослинне молоко",price:"85 ₴",badge:"new"}
-  ]},
-  {id:"bns",icon:"🌱",title:"Кава в зернах",desc:"Обсмажена партнерською обсмажнею",items:[
-    {name:"PerkUP Blend",note:"250 г · шоколад, горіх",price:"320 ₴",badge:""},
-    {name:"Ethiopia Yirgacheffe",note:"250 г · квіти, цитрус",price:"420 ₴",badge:"seasonal"},
-    {name:"Colombia Huila",note:"250 г · карамель, персик",price:"380 ₴",badge:""},
-    {name:"Brazil Santos",note:"250 г · горіх, шоколад",price:"350 ₴",badge:""}
-  ]},
-  {id:"mrc",icon:"🎁",title:"Мерч PerkUP",desc:"Брендовані речі для справжніх",items:[
-    {name:"Термостакан PerkUP",note:"350 мл, матовий",price:"450 ₴",badge:"new"},
-    {name:"Шоппер",note:"натуральна бавовна",price:"280 ₴",badge:""},
-    {name:"Пін-значок",note:"набір 3 шт",price:"120 ₴",badge:""},
-    {name:"Листівка + зерна",note:"подарунковий набір",price:"380 ₴",badge:"hot"}
-  ]}
+function doLogout(){isAdmin=false;sessionStorage.removeItem('pu_adm');document.getElementById('admin-login-wrap').style.display='flex';document.getElementById('admin-content').classList.remove('open');document.getElementById('login-input').value='';showErr('');document.getElementById('login-hint').textContent='';closeAdmin();}
+function setLang(l,btn){lang=l;document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');document.getElementById('search-input').placeholder=lang==='uk'?'Пошук по меню...':'Search menu...';renderMenu();buildFilters();}
+var defaultData={location:"Крона Парк 2",sections:[
+{id:"esp",icon:"☕",title:{uk:"Еспресо-напої",en:"Espresso drinks"},desc:{uk:"Зернова суміш PerkUP Blend",en:"PerkUP Blend coffee"},items:[
+{name:{uk:"Еспресо",en:"Espresso"},note:{uk:"30 мл",en:"30 ml"},price:"35 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Доппіо",en:"Doppio"},note:{uk:"60 мл",en:"60 ml"},price:"45 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Американо",en:"Americano"},note:{uk:"150 мл",en:"150 ml"},price:"50 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Капучино",en:"Cappuccino"},note:{uk:"160 мл",en:"160 ml"},price:"65 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Флет Вайт",en:"Flat White"},note:{uk:"150 мл",en:"150 ml"},price:"70 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Лате",en:"Latte"},note:{uk:"300 мл",en:"300 ml"},price:"75 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Кортадо",en:"Cortado"},note:{uk:"90 мл",en:"90 ml"},price:"60 ₴",badge:"hot",photo:"",allergens:[1],visible:true},
+{name:{uk:"Рафе",en:"Raffe"},note:{uk:"220 мл, вершки 35%",en:"220 ml, cream 35%"},price:"90 ₴",badge:"",photo:"",allergens:[1,2],visible:true}]},
+{id:"aut",icon:"✨",title:{uk:"Авторські напої",en:"Signature drinks"},desc:{uk:"Сезонне меню",en:"Seasonal menu"},items:[
+{name:{uk:"Карамельний лате",en:"Caramel Latte"},note:{uk:"домашня карамель",en:"homemade caramel"},price:"95 ₴",badge:"hot",photo:"",allergens:[1],visible:true},
+{name:{uk:"Пістачіо лате",en:"Pistachio Latte"},note:{uk:"фісташкова паста",en:"pistachio paste"},price:"100 ₴",badge:"seasonal",photo:"",allergens:[1,3],visible:true},
+{name:{uk:"Кокос & Ваніль",en:"Coconut & Vanilla"},note:{uk:"кокосове молоко",en:"coconut milk"},price:"95 ₴",badge:"new",photo:"",allergens:[],visible:true},
+{name:{uk:"Матча лате",en:"Matcha Latte"},note:{uk:"церемоніальна матча",en:"ceremonial matcha"},price:"90 ₴",badge:"",photo:"",allergens:[1],visible:true},
+{name:{uk:"Chai Spice",en:"Chai Spice"},note:{uk:"масала, вівсяне молоко",en:"masala, oat milk"},price:"85 ₴",badge:"seasonal",photo:"",allergens:[],visible:true}]},
+{id:"tea",icon:"🫖",title:{uk:"Чай та трав'яні напої",en:"Tea & Herbal"},desc:{uk:"Листовий чай, 400 мл",en:"Loose leaf tea, 400 ml"},items:[
+{name:{uk:"Чорний Assam",en:"Black Assam"},note:{uk:"класичний",en:"classic"},price:"55 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Зелений Сенча",en:"Green Sencha"},note:{uk:"японський",en:"japanese"},price:"60 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Лаванда & М'ята",en:"Lavender & Mint"},note:{uk:"авторський збір",en:"house blend"},price:"65 ₴",badge:"new",photo:"",allergens:[],visible:true},
+{name:{uk:"Ройбос з імбиром",en:"Rooibos Ginger"},note:{uk:"без кофеїну",en:"caffeine-free"},price:"65 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Чабрець & Мед",en:"Thyme & Honey"},note:{uk:"місцевий збір",en:"local blend"},price:"70 ₴",badge:"seasonal",photo:"",allergens:[],visible:true}]},
+{id:"cld",icon:"🧊",title:{uk:"Холодні напої",en:"Cold drinks"},desc:{uk:"Cold brew, лимонади",en:"Cold brew, lemonade"},items:[
+{name:{uk:"Cold Brew",en:"Cold Brew"},note:{uk:"24 год. настоювання",en:"24h steeping"},price:"85 ₴",badge:"hot",photo:"",allergens:[],visible:true},
+{name:{uk:"Нітро Cold Brew",en:"Nitro Cold Brew"},note:{uk:"з азотом",en:"with nitrogen"},price:"95 ₴",badge:"new",photo:"",allergens:[],visible:true},
+{name:{uk:"Лимонад PerkUP",en:"PerkUP Lemonade"},note:{uk:"лимон, базилік, м'ята",en:"lemon, basil, mint"},price:"80 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Полуниця & Маракуя",en:"Strawberry & Passionfruit"},note:{uk:"сезонний",en:"seasonal"},price:"85 ₴",badge:"seasonal",photo:"",allergens:[],visible:true}]},
+{id:"food",icon:"🥐",title:{uk:"Їжа",en:"Food"},desc:{uk:"Щоденна випічка та снеки",en:"Daily pastries & snacks"},items:[
+{name:{uk:"Круасан вершковий",en:"Butter Croissant"},note:{uk:"свіжий щодня",en:"fresh daily"},price:"55 ₴",badge:"",photo:"",allergens:[0,1,2],visible:true},
+{name:{uk:"Круасан мигдальний",en:"Almond Croissant"},note:{uk:"заварний крем, мигдаль",en:"custard, almond"},price:"75 ₴",badge:"hot",photo:"",allergens:[0,1,2,3],visible:true},
+{name:{uk:"Банановий хліб",en:"Banana Bread"},note:{uk:"домашній рецепт",en:"house recipe"},price:"65 ₴",badge:"",photo:"",allergens:[0,1,2],visible:true},
+{name:{uk:"Чізкейк NY",en:"NY Cheesecake"},note:{uk:"порція",en:"slice"},price:"95 ₴",badge:"",photo:"",allergens:[0,1,2],visible:true},
+{name:{uk:"Сирний сендвіч",en:"Cheese Sandwich"},note:{uk:"тост, гауда, помідор",en:"toast, gouda, tomato"},price:"90 ₴",badge:"",photo:"",allergens:[0,1],visible:true},
+{name:{uk:"Вівсянка з ягодами",en:"Oatmeal & Berries"},note:{uk:"рослинне молоко",en:"plant milk"},price:"85 ₴",badge:"new",photo:"",allergens:[0],visible:true}]},
+{id:"bns",icon:"🌱",title:{uk:"Кава в зернах",en:"Coffee beans"},desc:{uk:"Обсмажена партнером",en:"Roasted by our partner"},items:[
+{name:{uk:"PerkUP Blend",en:"PerkUP Blend"},note:{uk:"250 г · шоколад, горіх",en:"250g · chocolate, nut"},price:"320 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Ethiopia Yirgacheffe",en:"Ethiopia Yirgacheffe"},note:{uk:"250 г · квіти, цитрус",en:"250g · floral, citrus"},price:"420 ₴",badge:"seasonal",photo:"",allergens:[],visible:true},
+{name:{uk:"Colombia Huila",en:"Colombia Huila"},note:{uk:"250 г · карамель, персик",en:"250g · caramel, peach"},price:"380 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Brazil Santos",en:"Brazil Santos"},note:{uk:"250 г · горіх, шоколад",en:"250g · nut, chocolate"},price:"350 ₴",badge:"",photo:"",allergens:[],visible:true}]},
+{id:"mrc",icon:"🎁",title:{uk:"Мерч PerkUP",en:"PerkUP Merch"},desc:{uk:"Брендовані речі",en:"Branded goods"},items:[
+{name:{uk:"Термостакан PerkUP",en:"PerkUP Thermos"},note:{uk:"350 мл, матовий",en:"350ml, matte"},price:"450 ₴",badge:"new",photo:"",allergens:[],visible:true},
+{name:{uk:"Шоппер",en:"Tote Bag"},note:{uk:"натуральна бавовна",en:"natural cotton"},price:"280 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Пін-значок",en:"Pin Badge"},note:{uk:"набір 3 шт",en:"set of 3"},price:"120 ₴",badge:"",photo:"",allergens:[],visible:true},
+{name:{uk:"Листівка + зерна",en:"Card + Beans"},note:{uk:"подарунковий набір",en:"gift set"},price:"380 ₴",badge:"hot",photo:"",allergens:[],visible:true}]}
 ]};
-
-let menuData=JSON.parse(localStorage.getItem('perkup_menu')||'null')||defaultData;
-
-// ===== RENDER MENU =====
+var menuData=JSON.parse(localStorage.getItem('perkup_menu_v2')||'null')||defaultData;
+menuData.sections.forEach(function(sec){
+  if(typeof sec.title==='string')sec.title={uk:sec.title,en:sec.title};
+  if(!sec.desc||typeof sec.desc==='string')sec.desc={uk:sec.desc||'',en:sec.desc||''};
+  sec.items.forEach(function(item){
+    if(typeof item.name==='string')item.name={uk:item.name,en:item.name};
+    if(!item.note||typeof item.note==='string')item.note={uk:item.note||'',en:item.note||''};
+    if(item.visible===undefined)item.visible=true;
+    if(!item.allergens)item.allergens=[];
+    if(!item.photo)item.photo='';
+  });
+});
+function getStats(){return JSON.parse(localStorage.getItem('pu_stats')||'{"total":0,"days":{},"cats":{}}');}
+function saveStats(s){localStorage.setItem('pu_stats',JSON.stringify(s));}
+function trackView(){var s=getStats();s.total=(s.total||0)+1;var d=new Date().toISOString().slice(0,10);s.days[d]=(s.days[d]||0)+1;saveStats(s);}
+function trackCat(id){var s=getStats();s.cats=s.cats||{};s.cats[id]=(s.cats[id]||0)+1;saveStats(s);}
+function resetStats(){if(!confirm('Скинути статистику?'))return;localStorage.removeItem('pu_stats');renderStats();}
+function renderStats(){
+  var s=getStats();
+  var now=new Date();var today=now.toISOString().slice(0,10);
+  var todayV=s.days&&s.days[today]?s.days[today]:0;
+  var weekV=Object.entries(s.days||{}).filter(function(e){return(now-new Date(e[0]))<7*86400000;}).reduce(function(a,e){return a+e[1];},0);
+  var activeCount=menuData.sections.reduce(function(a,sec){return a+sec.items.filter(function(i){return i.visible!==false;}).length;},0);
+  document.getElementById('stats-grid').innerHTML='<div class="stat-card"><div class="stat-num">'+(s.total||0)+'</div><div class="stat-label">Всього переглядів</div></div><div class="stat-card"><div class="stat-num">'+todayV+'</div><div class="stat-label">Сьогодні</div></div><div class="stat-card"><div class="stat-num">'+weekV+'</div><div class="stat-label">За тиждень</div></div><div class="stat-card"><div class="stat-num">'+activeCount+'</div><div class="stat-label">Активних позицій</div></div>';
+  var days7=[];for(var i=6;i>=0;i--){var dd=new Date(now-i*86400000);days7.push(dd.toISOString().slice(0,10));}
+  var maxD=Math.max.apply(null,[1].concat(days7.map(function(d){return s.days&&s.days[d]?s.days[d]:0;})));
+  document.getElementById('stats-days').innerHTML=days7.map(function(d){var v=s.days&&s.days[d]?s.days[d]:0;return '<div class="chart-bar-row"><span class="chart-bar-label">'+d.slice(5)+'</span><div class="chart-bar-wrap"><div class="chart-bar" style="width:'+Math.round(v/maxD*100)+'%"></div></div><span class="chart-bar-val">'+v+'</span></div>';}).join('');
+  var cats=Object.entries(s.cats||{}).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+  var maxC=Math.max.apply(null,[1].concat(cats.map(function(e){return e[1];})));
+  if(!cats.length){document.getElementById('stats-cats').innerHTML='<p style="font-size:12px;color:var(--muted);">Ще немає даних</p>';}
+  else{document.getElementById('stats-cats').innerHTML=cats.map(function(e){var sec=menuData.sections.find(function(s){return s.id===e[0];});var lbl=sec?sec.title.uk:e[0];return '<div class="chart-bar-row"><span class="chart-bar-label">'+lbl+'</span><div class="chart-bar-wrap"><div class="chart-bar" style="width:'+Math.round(e[1]/maxC*100)+'%"></div></div><span class="chart-bar-val">'+e[1]+'</span></div>';}).join('');}
+}
+var activeFilter='all';
+function buildFilters(){
+  var wrap=document.getElementById('cat-filters');
+  wrap.innerHTML='<button class="cat-btn'+(activeFilter==='all'?' active':'')+ '" onclick="setFilter(\'all\',this)">'+(lang==='uk'?'Всі':'All')+'</button>';
+  menuData.sections.forEach(function(sec){
+    var hasVis=sec.items.some(function(i){return i.visible!==false;});
+    if(!hasVis)return;
+    wrap.innerHTML+='<button class="cat-btn'+(activeFilter===sec.id?' active':'')+'" onclick="setFilter(\''+sec.id+'\',this)">'+sec.icon+' '+(sec.title[lang]||sec.title.uk)+'</button>';
+  });
+}
+function setFilter(id,btn){activeFilter=id;document.querySelectorAll('.cat-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');if(id!=='all')trackCat(id);renderMenu();}
+function onSearch(v){document.getElementById('search-clear').style.display=v?'block':'none';renderMenu();}
+function clearSearch(){document.getElementById('search-input').value='';document.getElementById('search-clear').style.display='none';renderMenu();}
 function renderMenu(){
-  const root=document.getElementById('menu-render');root.innerHTML='';
-  menuData.sections.forEach(sec=>{
-    let h=`<div class="section-title">${sec.icon} ${sec.title}</div>`;
-    if(sec.desc)h+=`<p class="section-desc">${sec.desc}</p>`;
-    sec.items.forEach(item=>{
-      let b='';
-      if(item.badge==='new')b='<span class="badge badge-new">NEW</span>';
-      if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span>';
-      if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span>';
-      h+=`<div class="menu-item"><div class="item-info"><div class="item-name">${item.name}${b}</div>${item.note?`<div class="item-note">${item.note}</div>`:''}</div><div class="item-price">${item.price}</div></div>`;
+  var body=document.getElementById('menu-body');
+  var q=(document.getElementById('search-input').value||'').toLowerCase().trim();
+  body.innerHTML='';var anyResult=false;
+  menuData.sections.forEach(function(sec,si){
+    if(activeFilter!=='all'&&activeFilter!==sec.id)return;
+    var vis=sec.items.filter(function(item){
+      if(item.visible===false)return false;
+      if(!q)return true;
+      var n=(item.name[lang]||item.name.uk||'').toLowerCase();
+      var nt=(item.note[lang]||item.note.uk||'').toLowerCase();
+      return n.includes(q)||nt.includes(q);
     });
-    const w=document.createElement('div');w.innerHTML=h;root.appendChild(w);
+    if(!vis.length)return;
+    anyResult=true;
+    var secDiv=document.createElement('div');
+    secDiv.innerHTML='<div class="section-title" id="st-'+si+'">'+sec.icon+' '+(sec.title[lang]||sec.title.uk)+'</div>'+(sec.desc&&(sec.desc[lang]||sec.desc.uk)?'<p class="section-desc">'+(sec.desc[lang]||sec.desc.uk)+'</p>':'')+'<div id="si-'+si+'"></div>';
+    body.appendChild(secDiv);
+    var iWrap=document.getElementById('si-'+si);
+    vis.forEach(function(item){
+      var realIdx=sec.items.indexOf(item);
+      var card=document.createElement('div');card.className='menu-card';
+      card.onclick=function(){openModal(si,realIdx);};
+      var b='';if(item.badge==='new')b='<span class="badge badge-new">NEW</span>';if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span>';if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span>';
+      var al=(item.allergens&&item.allergens.length)?item.allergens.slice(0,3).map(function(a){return '<span class="allergen-tag">'+aLabel(a)+'</span>';}).join(''):'';
+      var img=item.photo?'<div class="menu-card-img"><img src="'+item.photo+'" alt="" loading="lazy" onerror="this.parentElement.className=\'menu-card-img no-photo\';this.parentElement.innerHTML=\''+sec.icon+'\'"/></div>':'<div class="menu-card-img no-photo">'+sec.icon+'</div>';
+      card.innerHTML='<div class="menu-card-inner">'+img+'<div class="menu-card-body"><div class="menu-card-top"><div class="menu-card-name">'+(item.name[lang]||item.name.uk)+'</div><div class="menu-card-price">'+item.price+'</div></div>'+(item.note&&(item.note[lang]||item.note.uk)?'<div class="menu-card-note">'+(item.note[lang]||item.note.uk)+'</div>':'')+'<div class="menu-card-bottom">'+b+al+'</div></div></div>';
+      iWrap.appendChild(card);
+    });
+  });
+  if(!anyResult)body.innerHTML='<div class="no-results"><div style="font-size:36px;">🔍</div><p>'+(lang==='uk'?'Нічого не знайдено':'Nothing found')+'</p></div>';
+  requestAnimationFrame(function(){
+    var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.05,rootMargin:'0px 0px -20px 0px'});
+    document.querySelectorAll('.menu-card,.section-title').forEach(function(el){obs.observe(el);});
   });
 }
-
-// ===== RENDER PRINT =====
-function renderPrint(){
-  const cols=document.getElementById('print-cols')?.value||'two';
-  const qrUrl=document.getElementById('print-qr-url')?.value||'https://perkup.com.ua/menu';
-  const area=document.getElementById('print-area');if(!area)return;
-  let sH='';
-  menuData.sections.forEach(sec=>{
-    let items='';
-    sec.items.forEach(item=>{
-      let b='';
-      if(item.badge==='new')b='<span class="print-badge print-badge-new">NEW</span>';
-      if(item.badge==='hot')b='<span class="print-badge print-badge-hot">ХІТ</span>';
-      if(item.badge==='seasonal')b='<span class="print-badge print-badge-seasonal">Сезон</span>';
-      items+=`<div class="print-item"><span class="print-item-name">${item.name}${b}${item.note?` <span class="print-item-note">· ${item.note}</span>`:''}</span><span class="print-item-price">${item.price}</span></div>`;
-    });
-    sH+=`<div><div class="print-sec-title"><span>${sec.icon}</span>${sec.title}</div>${items}</div>`;
-  });
-  area.innerHTML=`
-    <div class="print-menu-header">
-      <div class="print-logo">Perk<span>UP</span></div>
-      <div class="print-tagline">Спеціальна кава · Авторські напої · Їжа</div>
-      <div class="print-location">📍 ${menuData.location} · Бровари</div>
-    </div>
-    <div class="print-cols ${cols}">${sH}</div>
-    <div class="print-footer">
-      <div><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div style="margin-top:4px;">Telegram: @PerkUPBot</div></div>
-      <div class="qr-zone"><div><div class="qr-label">Цифрове меню</div><div id="print-qr-mini"></div></div></div>
-    </div>`;
-  document.getElementById('print-qr-mini').innerHTML='';
-  try{new QRCode(document.getElementById('print-qr-mini'),{text:qrUrl,width:64,height:64,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}catch(e){}
+function openModal(si,ii){
+  var sec=menuData.sections[si];var item=sec.items[ii];
+  var b='';if(item.badge==='new')b='<span class="badge badge-new">NEW</span> ';if(item.badge==='hot')b='<span class="badge badge-hot">🔥 ХІТ</span> ';if(item.badge==='seasonal')b='<span class="badge badge-seasonal">Сезон</span> ';
+  var al=(item.allergens&&item.allergens.length)?'<div class="modal-allergens"><h4>'+(lang==='uk'?'Алергени':'Allergens')+'</h4><div class="modal-allergens-list">'+item.allergens.map(function(a){return '<span class="allergen-tag">'+aLabel(a)+'</span>';}).join('')+'</div></div>':'';
+  var img=item.photo?'<img class="modal-img" src="'+item.photo+'" alt="" onerror="this.style.display=\'none\'">':'<div class="modal-img-placeholder">'+sec.icon+'</div>';
+  document.getElementById('modal-content').innerHTML='<button class="modal-close" onclick="closeModal()">✕</button>'+img+'<div class="modal-name">'+(item.name[lang]||item.name.uk)+'</div><div class="modal-price">'+item.price+'</div>'+b+(item.note&&(item.note[lang]||item.note.uk)?'<div class="modal-note">'+(item.note[lang]||item.note.uk)+'</div>':'')+al;
+  document.getElementById('item-modal').classList.add('open');
 }
-
-// ===== QR =====
+function closeModal(){document.getElementById('item-modal').classList.remove('open');}
+document.getElementById('item-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 function generateQR(){
-  const url=document.getElementById('qr-url-input').value||'https://perkup.com.ua/menu';
+  var url=document.getElementById('qr-url-input').value||'https://menukrona.perkup.com.ua';
   document.getElementById('qrcode').innerHTML='';
-  new QRCode(document.getElementById('qrcode'),{text:url,width:220,height:220,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
-  const p=document.getElementById('print-qr-url');if(p){p.value=url;renderPrint();}
+  new QRCode(document.getElementById('qrcode'),{text:url,width:200,height:200,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  var p=document.getElementById('print-qr-url');if(p){p.value=url;renderPrint();}
 }
-function downloadQR(){
-  const c=document.querySelector('#qrcode canvas');
-  if(!c){alert('Спочатку згенеруйте QR');return;}
-  const a=document.createElement('a');a.download='perkup-qr.png';a.href=c.toDataURL('image/png');a.click();
+function getQRCanvas(cb){
+  var c=document.querySelector('#qrcode canvas');
+  if(c){cb(c);return;}
+  var img=document.querySelector('#qrcode img');
+  if(img){var canvas=document.createElement('canvas');canvas.width=img.naturalWidth||200;canvas.height=img.naturalHeight||200;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);cb(canvas);}
+  else{generateQR();setTimeout(function(){var c2=document.querySelector('#qrcode canvas')||document.querySelector('#qrcode img');if(c2)cb(c2);else alert('Спочатку згенеруйте QR');},600);}
 }
-function downloadQRBranded(){
-  const src=document.querySelector('#qrcode canvas');
-  if(!src){alert('Спочатку згенеруйте QR');return;}
-  const sz=300,c=document.createElement('canvas');c.width=sz;c.height=sz+60;
-  const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
-  ctx.drawImage(src,40,20,sz-80,sz-80);
-  ctx.fillStyle='#1C1A17';ctx.font='bold 22px serif';ctx.textAlign='center';ctx.fillText('PerkUP',sz/2,sz-20);
-  ctx.fillStyle='#888';ctx.font='11px sans-serif';ctx.fillText('Крона Парк 2',sz/2,sz);
-  const a=document.createElement('a');a.download='perkup-qr-branded.png';a.href=c.toDataURL('image/png');a.click();
+function downloadQR(){getQRCanvas(function(c){var a=document.createElement('a');a.download='perkup-qr.png';a.href=c.toDataURL('image/png');a.click();});}
+function downloadQRBranded(){getQRCanvas(function(src){var sz=300,c=document.createElement('canvas');c.width=sz;c.height=sz+60;var ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(src,40,20,sz-80,sz-80);ctx.fillStyle='#1C1A17';ctx.font='bold 22px serif';ctx.textAlign='center';ctx.fillText('PerkUP',sz/2,sz-20);ctx.fillStyle='#888';ctx.font='11px sans-serif';ctx.fillText('Крона Парк 2',sz/2,sz);var a=document.createElement('a');a.download='perkup-qr-branded.png';a.href=c.toDataURL('image/png');a.click();});}
+function renderPrint(){
+  var cols=document.getElementById('print-cols')?document.getElementById('print-cols').value:'two';
+  var qrUrl=document.getElementById('print-qr-url')?document.getElementById('print-qr-url').value:'https://menukrona.perkup.com.ua';
+  var area=document.getElementById('print-area');if(!area)return;
+  var sH='';
+  menuData.sections.forEach(function(sec){
+    var vis=sec.items.filter(function(i){return i.visible!==false;});if(!vis.length)return;
+    var items='';vis.forEach(function(item){var b='';if(item.badge==='new')b='<span class="print-badge print-badge-new">NEW</span>';if(item.badge==='hot')b='<span class="print-badge print-badge-hot">ХІТ</span>';if(item.badge==='seasonal')b='<span class="print-badge print-badge-seasonal">Сезон</span>';items+='<div class="print-item"><span class="print-item-name">'+item.name.uk+b+(item.note&&item.note.uk?' <span class="print-item-note">· '+item.note.uk+'</span>':'')+'</span><span class="print-item-price">'+item.price+'</span></div>';});
+    sH+='<div><div class="print-sec-title"><span>'+sec.icon+'</span>'+sec.title.uk+'</div>'+items+'</div>';
+  });
+  area.innerHTML='<div class="print-menu-header"><div class="print-logo">Perk<span>UP</span></div><div class="print-tagline">Спеціальна кава · Авторські напої · Їжа</div><div style="font-size:10px;color:var(--muted);margin-top:3px;">📍 '+menuData.location+' · Бровари</div></div><div class="print-cols '+cols+'">'+sH+'</div><div class="print-footer"><div><div>Wi-Fi: <strong>PerkUP_Free</strong></div><div style="margin-top:2px;">Telegram: @PerkUPBot</div></div><div class="print-qr-zone"><div><div class="print-qr-label">Цифрове меню</div><div id="print-qr-mini"></div></div></div></div>';
+  document.getElementById('print-qr-mini').innerHTML='';try{new QRCode(document.getElementById('print-qr-mini'),{text:qrUrl,width:56,height:56,colorDark:'#1C1A17',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}catch(e){}
 }
-
-// ===== DOWNLOAD PRINT =====
 function downloadPrintHTML(){
-  const area=document.getElementById('print-area');if(!area)return;
-  const st=`<style>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Jost',sans-serif;background:white;color:#1C1A17;padding:20mm}.print-menu-header{text-align:center;padding-bottom:24px;margin-bottom:28px;border-bottom:2px solid #1C1A17}.print-logo{font-family:'Playfair Display',serif;font-size:48px;letter-spacing:-0.02em;line-height:1;color:#1C1A17}.print-logo span{color:#C4973A}.print-tagline{font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#8B7B6B;margin-top:6px}.print-location{font-size:12px;color:#8B7B6B;margin-top:4px}.print-cols{display:grid;gap:32px}.print-cols.two{grid-template-columns:1fr 1fr}.print-cols.one{grid-template-columns:1fr}.print-sec-title{font-family:'Playfair Display',serif;font-size:17px;color:#6B4F3A;padding-bottom:6px;border-bottom:1px solid #E8DDD0;margin-bottom:12px;display:flex;align-items:center;gap:8px}.print-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:13px;gap:8px}.print-item:last-child{border-bottom:none}.print-item-name{color:#1C1A17;font-weight:400;flex:1}.print-item-note{color:#8B7B6B;font-style:italic;font-size:11px}.print-item-price{color:#6B4F3A;font-weight:600;white-space:nowrap}.print-badge{font-size:9px;padding:1px 5px;border-radius:10px;margin-left:4px;font-weight:600}.print-badge-new{background:#E8F4E8;color:#3D5A3E}.print-badge-hot{background:#FAEEE0;color:#B85C2A}.print-badge-seasonal{background:#EEE8F4;color:#5A3A8B}.print-footer{margin-top:28px;padding-top:16px;border-top:1px solid #E8DDD0;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#8B7B6B}.qr-zone{display:flex;align-items:center;gap:12px}.qr-label{font-size:10px;color:#8B7B6B;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}@media print{body{padding:0}}</style>`;
-  const html=`<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>PerkUP Меню</title>${st}</head><body>${area.innerHTML}</body></html>`;
-  const a=document.createElement('a');a.download='perkup-menu-print.html';a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.click();
+  var area=document.getElementById('print-area');if(!area)return;
+  var st='<style>@import url(\'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap\');:root{--cream:#F9F5EF;--dark:#1C1A17;--brown:#6B4F3A;--gold:#C4973A;--accent:#E8DDD0;--muted:#8B7B6B;--green:#3D5A3E;}*{margin:0;padding:0;box-sizing:border-box}body{font-family:\'Jost\',sans-serif;background:white;color:#1C1A17;padding:16mm}.print-menu-header{text-align:center;padding-bottom:18px;margin-bottom:22px;border-bottom:2px solid #1C1A17}.print-logo{font-family:\'Playfair Display\',serif;font-size:42px;letter-spacing:-0.02em;line-height:1;color:#1C1A17}.print-logo span{color:#C4973A}.print-tagline{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:#8B7B6B;margin-top:4px}.print-cols{display:grid;gap:24px}.print-cols.two{grid-template-columns:1fr 1fr}.print-cols.one{grid-template-columns:1fr}.print-sec-title{font-family:\'Playfair Display\',serif;font-size:15px;color:#6B4F3A;padding-bottom:4px;border-bottom:1px solid #E8DDD0;margin-bottom:8px;display:flex;align-items:center;gap:6px}.print-item{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px dotted rgba(0,0,0,0.1);font-size:11px;gap:6px}.print-item:last-child{border-bottom:none}.print-item-name{color:#1C1A17;flex:1}.print-item-note{color:#8B7B6B;font-style:italic;font-size:10px}.print-item-price{color:#6B4F3A;font-weight:600;white-space:nowrap}.print-badge{font-size:8px;padding:1px 4px;border-radius:8px;margin-left:3px;font-weight:600}.print-badge-new{background:#E8F4E8;color:#3D5A3E}.print-badge-hot{background:#FAEEE0;color:#B85C2A}.print-badge-seasonal{background:#EEE8F4;color:#5A3A8B}.print-footer{margin-top:20px;padding-top:12px;border-top:1px solid #E8DDD0;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#8B7B6B}.print-qr-zone{display:flex;align-items:center;gap:8px}.print-qr-label{font-size:8px;color:#8B7B6B;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px}@media print{body{padding:0}}</style>';
+  var html='<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>PerkUP Меню</title>'+st+'</head><body>'+area.innerHTML+'</body></html>';
+  var a=document.createElement('a');a.download='perkup-menu-print.html';a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.click();
 }
-
-// ===== EDITOR =====
 function renderEditor(){
-  const root=document.getElementById('editor-root');root.innerHTML='';
-  menuData.sections.forEach((sec,si)=>{
-    const div=document.createElement('div');div.className='section-editor';
-    div.innerHTML=`
-      <div class="sec-hdr" onclick="togSec(${si})">
-        <span>${sec.icon} ${sec.title} (${sec.items.length} позицій)</span>
-        <span class="tog" id="tog-${si}">▾</span>
-      </div>
-      <div class="sec-body" id="secb-${si}">
-        <div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:8px;margin-bottom:8px;">
-          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Назва</label><input type="text" value="${sec.title}" oninput="updSec(${si},'title',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
-          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Опис</label><input type="text" value="${sec.desc||''}" oninput="updSec(${si},'desc',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
-          <div><label style="font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">Іконка</label><input type="text" value="${sec.icon}" oninput="updSec(${si},'icon',this.value)" style="margin-top:4px;width:100%;padding:7px 10px;border:1px solid var(--accent);border-radius:6px;font-family:'Jost',sans-serif;font-size:13px;background:white;color:var(--dark);outline:none;"/></div>
-        </div>
-        <div class="row-labels"><span>Назва</span><span>Опис/розмір</span><span>Ціна</span><span>Бейдж</span><span></span></div>
-        <div id="items-${si}"></div>
-        <button class="btn-add" onclick="addItem(${si})">+ Додати позицію</button>
-        <div style="margin-top:12px;text-align:right;"><button onclick="delSec(${si})" style="font-size:12px;color:#c44;background:none;border:none;cursor:pointer;padding:4px 8px;">✕ Видалити секцію</button></div>
-      </div>`;
-    root.appendChild(div);renderItems(si);
+  var root=document.getElementById('editor-root');root.innerHTML='';
+  menuData.sections.forEach(function(sec,si){
+    var div=document.createElement('div');div.className='section-editor';div.dataset.si=si;div.setAttribute('draggable','true');
+    var allergenLabels=ALLERGENS_UA.join(', ');
+    div.innerHTML='<div class="sec-hdr" onclick="togSec('+si+')"><div class="sec-hdr-left"><span class="sec-drag-handle" onmousedown="event.stopPropagation()" title="Перетягнути">⠿</span><span>'+sec.icon+' '+(sec.title.uk||'')+ ' ('+sec.items.length+')</span></div><span class="tog" id="tog-'+si+'">▾</span></div><div class="sec-body" id="secb-'+si+'"><div class="sec-meta-row"><div class="field-group"><label>Назва UA</label><input type="text" value="'+(sec.title.uk||'')+'" oninput="updSec('+si+',\'title_uk\',this.value)"/></div><div class="field-group"><label>Назва EN</label><input type="text" value="'+(sec.title.en||'')+'" oninput="updSec('+si+',\'title_en\',this.value)"/></div><div class="field-group"><label>Іконка</label><input type="text" value="'+sec.icon+'" oninput="updSec('+si+',\'icon\',this.value)"/></div></div><div class="sec-meta-row two"><div class="field-group"><label>Опис UA</label><input type="text" value="'+(sec.desc&&sec.desc.uk||'')+'" oninput="updSec('+si+',\'desc_uk\',this.value)"/></div><div class="field-group"><label>Опис EN</label><input type="text" value="'+(sec.desc&&sec.desc.en||'')+'" oninput="updSec('+si+',\'desc_en\',this.value)"/></div></div><div class="items-hdr"><span></span><span>Назва UA/EN</span><span>Опис</span><span>Ціна</span><span>Бейдж</span><span>Фото URL</span><span>Вид</span><span>Del</span></div><div id="items-'+si+'"></div><button class="btn-add" onclick="addItem('+si+')">+ Позиція</button><div style="margin-top:8px;text-align:right;"><button onclick="delSec('+si+')" style="font-size:11px;color:#c44;background:none;border:none;cursor:pointer;padding:3px 7px;">✕ Видалити секцію</button></div></div>';
+    root.appendChild(div);
+    renderItems(si);
   });
+  initSecDrag();
 }
-
 function renderItems(si){
-  const c=document.getElementById(`items-${si}`);if(!c)return;c.innerHTML='';
-  menuData.sections[si].items.forEach((item,ii)=>{
-    const row=document.createElement('div');row.className='item-row';
-    row.innerHTML=`
-      <input type="text" value="${item.name}" placeholder="Назва" oninput="updItem(${si},${ii},'name',this.value)"/>
-      <input type="text" value="${item.note||''}" placeholder="Опис/розмір" oninput="updItem(${si},${ii},'note',this.value)"/>
-      <input type="text" value="${item.price}" placeholder="₴" oninput="updItem(${si},${ii},'price',this.value)"/>
-      <select onchange="updItem(${si},${ii},'badge',this.value)">
-        <option value="" ${!item.badge?'selected':''}>—</option>
-        <option value="new" ${item.badge==='new'?'selected':''}>NEW</option>
-        <option value="hot" ${item.badge==='hot'?'selected':''}>ХІТ</option>
-        <option value="seasonal" ${item.badge==='seasonal'?'selected':''}>Сезон</option>
-      </select>
-      <button class="btn-del" onclick="delItem(${si},${ii})">✕</button>`;
-    c.appendChild(row);
+  var wrap=document.getElementById('items-'+si);if(!wrap)return;wrap.innerHTML='';
+  menuData.sections[si].items.forEach(function(item,ii){
+    var row=document.createElement('div');row.className='item-edit-row';row.dataset.ii=ii;row.setAttribute('draggable','true');
+    var al=ALLERGENS_UA.map(function(a,ai){return '<label class="a-check"><input type="checkbox"'+(item.allergens&&item.allergens.includes(ai)?' checked':'')+' onchange="toggleAl('+si+','+ii+','+ai+',this.checked)"/> '+a+'</label>';}).join('');
+    row.innerHTML='<span class="drag-handle">⠿</span><div><input type="text" value="'+(item.name.uk||'')+'" placeholder="UA" oninput="updItem('+si+','+ii+',\'name_uk\',this.value)" style="margin-bottom:3px;"/><input type="text" value="'+(item.name.en||'')+'" placeholder="EN" oninput="updItem('+si+','+ii+',\'name_en\',this.value)"/></div><div><input type="text" value="'+(item.note&&item.note.uk||'')+'" placeholder="Опис UA" oninput="updItem('+si+','+ii+',\'note_uk\',this.value)" style="margin-bottom:3px;"/><input type="text" value="'+(item.note&&item.note.en||'')+'" placeholder="Note EN" oninput="updItem('+si+','+ii+',\'note_en\',this.value)"/></div><input type="text" value="'+item.price+'" placeholder="₴" oninput="updItem('+si+','+ii+',\'price\',this.value)"/><select onchange="updItem('+si+','+ii+',\'badge\',this.value)"><option value=""'+(!item.badge?' selected':'')+'>—</option><option value="new"'+(item.badge==='new'?' selected':'')+'>NEW</option><option value="hot"'+(item.badge==='hot'?' selected':'')+'>ХІТ</option><option value="seasonal"'+(item.badge==='seasonal'?' selected':'')+'>Сезон</option></select><div class="photo-wrap"><input type="text" value="'+(item.photo||'')+'" placeholder="https://..." oninput="updItem('+si+','+ii+',\'photo\',this.value);updPhotoThumb('+si+','+ii+',this.value)"/><img id="pth-'+si+'-'+ii+'" class="photo-preview-thumb" src="'+(item.photo||'')+'" style="'+(item.photo?'display:block':'display:none')+'" onerror="this.style.display=\'none\'"/></div><button class="toggle-vis '+(item.visible===false?'h':'v')+'" onclick="toggleVis('+si+','+ii+')">'+(item.visible===false?'Скрит':'Видно')+'</button><button class="btn-del" onclick="delItem('+si+','+ii+')">✕</button>';
+    var alRow=document.createElement('div');alRow.className='allergen-row';alRow.innerHTML='<span style="font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;display:block;margin-bottom:4px;">Алергени:</span><div class="allergen-checks">'+al+'</div>';
+    wrap.appendChild(row);wrap.appendChild(alRow);
   });
+  initItemDrag(si);
 }
-
-function togSec(si){const b=document.getElementById(`secb-${si}`),t=document.getElementById(`tog-${si}`);if(b.style.display==='none'){b.style.display='';t.textContent='▾';}else{b.style.display='none';t.textContent='▸';}}
-function updSec(si,f,v){menuData.sections[si][f]=v;markUnsaved();renderMenu();renderPrint();}
-function updItem(si,ii,f,v){menuData.sections[si].items[ii][f]=v;markUnsaved();renderMenu();renderPrint();}
+function updPhotoThumb(si,ii,v){var img=document.getElementById('pth-'+si+'-'+ii);if(!img)return;if(v){img.src=v;img.style.display='block';}else img.style.display='none';}
+function toggleAl(si,ii,ai,checked){if(!menuData.sections[si].items[ii].allergens)menuData.sections[si].items[ii].allergens=[];if(checked){if(!menuData.sections[si].items[ii].allergens.includes(ai))menuData.sections[si].items[ii].allergens.push(ai);}else menuData.sections[si].items[ii].allergens=menuData.sections[si].items[ii].allergens.filter(function(x){return x!==ai;});markUnsaved();renderMenu();}
+function toggleVis(si,ii){menuData.sections[si].items[ii].visible=menuData.sections[si].items[ii].visible===false?true:false;renderItems(si);markUnsaved();renderMenu();renderPrint();buildFilters();}
+function togSec(si){var b=document.getElementById('secb-'+si),t=document.getElementById('tog-'+si);if(b.style.display==='none'){b.style.display='';t.textContent='▾';}else{b.style.display='none';t.textContent='▸';}}
+function updSec(si,f,v){var sec=menuData.sections[si];if(f==='title_uk')sec.title.uk=v;else if(f==='title_en')sec.title.en=v;else if(f==='desc_uk'){if(!sec.desc)sec.desc={uk:'',en:''};sec.desc.uk=v;}else if(f==='desc_en'){if(!sec.desc)sec.desc={uk:'',en:''};sec.desc.en=v;}else sec[f]=v;markUnsaved();renderMenu();renderPrint();}
+function updItem(si,ii,f,v){var item=menuData.sections[si].items[ii];if(f==='name_uk')item.name.uk=v;else if(f==='name_en')item.name.en=v;else if(f==='note_uk'){if(!item.note||typeof item.note==='string')item.note={uk:v,en:''};else item.note.uk=v;}else if(f==='note_en'){if(!item.note||typeof item.note==='string')item.note={uk:'',en:v};else item.note.en=v;}else item[f]=v;markUnsaved();renderMenu();renderPrint();}
 function delItem(si,ii){menuData.sections[si].items.splice(ii,1);renderItems(si);markUnsaved();renderMenu();renderPrint();}
-function addItem(si){menuData.sections[si].items.push({name:'Нова позиція',note:'',price:'0 ₴',badge:''});renderItems(si);markUnsaved();renderMenu();}
+function addItem(si){menuData.sections[si].items.push({name:{uk:'Нова позиція',en:'New item'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',allergens:[],visible:true});renderItems(si);markUnsaved();renderMenu();}
 function delSec(si){if(!confirm('Видалити секцію?'))return;menuData.sections.splice(si,1);renderEditor();markUnsaved();renderMenu();renderPrint();}
-function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:'Нова секція',desc:'',items:[{name:'Позиція 1',note:'',price:'0 ₴',badge:''}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
-function markUnsaved(){const s=document.getElementById('save-status');if(s)s.textContent='⚠ Є незбережені зміни';}
-function saveData(){localStorage.setItem('perkup_menu',JSON.stringify(menuData));const s=document.getElementById('save-status');if(s)s.textContent='✓ Збережено';setTimeout(()=>{if(s)s.textContent='Всі зміни збережено';},2000);}
-
-// ===== TABS =====
-function showTab(name,btn){
-  document.querySelectorAll('.atab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.atab-btn').forEach(b=>b.classList.remove('active'));
+function addSection(){menuData.sections.push({id:'s'+Date.now(),icon:'🆕',title:{uk:'Нова секція',en:'New section'},desc:{uk:'',en:''},items:[{name:{uk:'Позиція 1',en:'Item 1'},note:{uk:'',en:''},price:'0 ₴',badge:'',photo:'',allergens:[],visible:true}]});renderEditor();markUnsaved();renderMenu();renderPrint();}
+function markUnsaved(){var s=document.getElementById('save-status');if(s)s.textContent='⚠ Є незбережені зміни';}
+function saveData(){localStorage.setItem('perkup_menu_v2',JSON.stringify(menuData));var s=document.getElementById('save-status');if(s)s.textContent='✓ Збережено';setTimeout(function(){if(s)s.textContent='Всі зміни збережено';},2000);}
+function initItemDrag(si){
+  var wrap=document.getElementById('items-'+si);if(!wrap)return;
+  var dragged=null,dragIdx=null;
+  wrap.addEventListener('dragstart',function(e){var t=e.target.closest('.item-edit-row');if(!t)return;dragged=t;dragIdx=parseInt(t.dataset.ii);setTimeout(function(){if(dragged)dragged.style.opacity='0.35';},0);});
+  wrap.addEventListener('dragend',function(){if(dragged)dragged.style.opacity='1';dragged=null;});
+  wrap.addEventListener('dragover',function(e){e.preventDefault();var t=e.target.closest('.item-edit-row');if(!t||t===dragged)return;var ti=parseInt(t.dataset.ii);if(ti===dragIdx)return;var items=menuData.sections[si].items;var moved=items.splice(dragIdx,1)[0];items.splice(ti,0,moved);dragIdx=ti;renderItems(si);markUnsaved();renderMenu();});
+}
+function initSecDrag(){
+  var root=document.getElementById('editor-root');if(!root)return;
+  var dragged=null,dragIdx=null;
+  root.addEventListener('dragstart',function(e){var t=e.target.closest('.section-editor');if(!t)return;var h=e.target.closest('.sec-drag-handle');if(!h)return;dragged=t;dragIdx=parseInt(t.dataset.si);setTimeout(function(){if(dragged)dragged.style.opacity='0.35';},0);});
+  root.addEventListener('dragend',function(){if(dragged)dragged.style.opacity='1';dragged=null;});
+  root.addEventListener('dragover',function(e){e.preventDefault();var t=e.target.closest('.section-editor');if(!t||t===dragged)return;var ti=parseInt(t.dataset.si);if(ti===dragIdx)return;var moved=menuData.sections.splice(dragIdx,1)[0];menuData.sections.splice(ti,0,moved);dragIdx=ti;renderEditor();markUnsaved();renderMenu();});
+}
+function showATab(name,btn){
+  document.querySelectorAll('.atab-content').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.atab-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('atab-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
   if(name==='print')renderPrint();
   if(name==='edit')renderEditor();
+  if(name==='stats')renderStats();
+  if(name==='qr')setTimeout(generateQR,50);
 }
-
-// ===== INIT =====
 window.onload=function(){
-  renderMenu();
-  if(sessionStorage.getItem('pu_adm')==='1'){
-    isAdmin=true;
-    document.getElementById('admin-login-wrap').style.display='none';
-    document.getElementById('admin-content').classList.add('open');
-  }
+  trackView();renderMenu();buildFilters();
+  if(sessionStorage.getItem('pu_adm')==='1'){isAdmin=true;document.getElementById('admin-login-wrap').style.display='none';document.getElementById('admin-content').classList.add('open');}
 };
 </script>
 </body>
